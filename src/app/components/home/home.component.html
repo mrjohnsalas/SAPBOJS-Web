@@ -1,0 +1,37 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Profile</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a>Extra Pages</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Profile</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-content">
+
+                    <span class="text-muted small float-right">Last modification: <i class="fa fa-clock-o"></i> 2:10 pm - 12.06.2014</span>
+                    <h2>Home</h2>
+                    <p *ngIf="user">
+                        Bienvenido: {{ user.fullName }}
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

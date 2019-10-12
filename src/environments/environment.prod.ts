@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  webApiURL: 'https://webapi.grafipapel.com.pe/api/'
 };
