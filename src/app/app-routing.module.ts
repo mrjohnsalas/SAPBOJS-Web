@@ -6,8 +6,6 @@ import { LoginComponent } from './components/login/login.component';
 import { FailureTypeComponent } from './components/failuretype/failuretype.component';
 import { RoleName } from './_models/rolename.enum';
 
-
-
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'failuretype', component: FailureTypeComponent, canActivate: [AuthGuard],

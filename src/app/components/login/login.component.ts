@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private ngZone: NgZone,
     private authenticationService: AuthenticationService) {
     if (this.authenticationService.currentUserValue) {
         this.router.navigate(['/']);
@@ -54,7 +55,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.authenticationService.login(this.f.email.value, this.f.password.value).subscribe(
       data => {
-        this.router.navigate([this.returnUrl]);
+        this.ngZone.run(() => {
+          this.router.navigate([this.returnUrl]);
+        });
       },
       error => {
         this.error = error;

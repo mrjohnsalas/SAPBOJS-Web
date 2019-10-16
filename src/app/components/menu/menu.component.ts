@@ -3,7 +3,6 @@ import { User } from 'src/app/_models/user';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -21,5 +20,4 @@ export class MenuComponent {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
   }
-
 }
