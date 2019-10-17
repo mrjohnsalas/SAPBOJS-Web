@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
           this.goHome();
         }
       }
-
+      
       return true;
     }
 

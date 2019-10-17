@@ -33,6 +33,13 @@ export class AuthenticationService {
   }
 
   setRoles() {
+    this.isAdmin = false;
+    this.isSalesUser = false;
+    this.isCreditUser = false;
+    this.isLogisticsUser = false;
+    this.isMaintenanceUser = false;
+    this.isProductionUser = false;
+
     if (this.currentUserValue && this.currentUserValue.roles) {
       if (this.currentUserValue.roles.findIndex(role => role.name === RoleName.Admin) !== -1) {
         this.isAdmin = true;
@@ -81,6 +88,7 @@ export class AuthenticationService {
           if (user && user.token) {
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);
+            this.setRoles();
           }
           return user;
         }));

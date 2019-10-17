@@ -22,7 +22,7 @@
             </li>
 
             <!-- AllUsers -->
-            <li class="active">
+            <li [ngClass]="{'active': router.isActive('') || router.isActive('home')}">
                 <a routerLink="home"><i class="fa fa-tachometer"></i> <span class="nav-label">Dashboard</span></a>
             </li>
 
@@ -63,8 +63,7 @@
 
             <!-- MaintenanceUsers -->
             <li *ngIf="authenticationService.isMaintenanceUser">
-                <a><i class="fa fa-wrench"></i> <span class="nav-label">Mantenimiento </span><span
-                        class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-wrench"></i> <span class="nav-label">Mantenimiento </span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">OTM</a></li>
                     <li><a href="#">Fallas de máquinas de mantenimiento</a></li>
@@ -90,8 +89,7 @@
 
             <!-- ProductionUsers -->
             <li *ngIf="authenticationService.isProductionUser">
-                <a><i class="fa fa-snowflake-o"></i> <span class="nav-label">Producción </span><span
-                        class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-snowflake-o"></i> <span class="nav-label">Producción </span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">Accesorio</a></li>
                     <li><a href="#">Formato</a></li>
