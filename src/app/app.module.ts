@@ -13,7 +13,6 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { FailureTypeComponent } from './components/failuretype/failuretype.component';
 
 @NgModule({
   declarations: [
@@ -22,14 +21,13 @@ import { FailureTypeComponent } from './components/failuretype/failuretype.compo
     HomeComponent,
     TopMenuComponent,
     FooterComponent,
-    MenuComponent,
-    FailureTypeComponent
+    MenuComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule,
-    HttpClientModule
+    AppRoutingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }

@@ -3,14 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './_helpers/auth.guard';
 import { LoginComponent } from './components/login/login.component';
-import { FailureTypeComponent } from './components/failuretype/failuretype.component';
-import { RoleName } from './_models/rolename.enum';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'failuretype', component: FailureTypeComponent, canActivate: [AuthGuard],
-    data: { roles: [RoleName.MaintenanceAdmin, RoleName.MaintenanceManager, RoleName.MaintenanceEmployee]} },
   { path: 'login', component: LoginComponent },
+  {
+    path: 'failuretypes', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
+    loadChildren: () => import('./_modules/failure-types.module').then(module => module.FailureTypesModule)
+  },
   { path: '**', redirectTo: '' }
 ];
 

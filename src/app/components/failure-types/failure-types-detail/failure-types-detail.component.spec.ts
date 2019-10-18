@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FailuretypeComponent } from './failuretype.component';
+import { FailureTypesDetailComponent } from './failure-types-detail.component';
 
-describe('FailuretypeComponent', () => {
-  let component: FailuretypeComponent;
-  let fixture: ComponentFixture<FailuretypeComponent>;
+describe('FailureTypesDetailComponent', () => {
+  let component: FailureTypesDetailComponent;
+  let fixture: ComponentFixture<FailureTypesDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FailuretypeComponent ]
+      declarations: [ FailureTypesDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FailuretypeComponent);
+    fixture = TestBed.createComponent(FailureTypesDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
