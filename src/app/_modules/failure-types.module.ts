@@ -6,14 +6,15 @@ import { FailureTypesComponent } from '../components/failure-types/failure-types
 import { FailureTypesListComponent } from '../components/failure-types/failure-types-list/failure-types-list.component';
 import { FailureTypesDetailComponent } from '../components/failure-types/failure-types-detail/failure-types-detail.component';
 import { FailureTypesFormComponent } from '../components/failure-types/failure-types-form/failure-types-form.component';
-
+import { BreadcrumbComponent } from '../components/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
     FailureTypesComponent,
     FailureTypesListComponent,
     FailureTypesDetailComponent,
-    FailureTypesFormComponent
+    FailureTypesFormComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,

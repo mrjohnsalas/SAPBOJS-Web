@@ -8,8 +8,8 @@ import { environment } from '../../environments/environment';
 const routes: Routes = [
   { path: '', canActivateChild: [AuthGuard], data: { roles: environment.maintenanceRoles },
     children: [
-      { path: '', component: FailureTypesListComponent },
-      { path: ':id', component: FailureTypesDetailComponent } ] }
+      { path: '', component: FailureTypesListComponent, data: { breadcrumb: 'Lista' } },
+      { path: ':id', component: FailureTypesDetailComponent, data: { breadcrumb: 'Detalle' } } ] }
 ];
 
 @NgModule({
