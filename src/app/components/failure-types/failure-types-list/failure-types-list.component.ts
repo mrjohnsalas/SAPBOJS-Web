@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FailureType } from '../../../_models/failure-type';
+import { FailureTypeService } from '../../../_services/failure-type.service';
 
 @Component({
   selector: 'app-failure-types-list',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FailureTypesListComponent implements OnInit {
 
-  constructor() { }
+  failureTypes: FailureType[];
+  currentDate: string;
+
+  constructor(private failureTypeService: FailureTypeService) { }
 
   ngOnInit() {
+    this.failureTypeService.getFailureTypes().subscribe(objs => this.failureTypes = objs, error => console.error(error));
+    this.currentDate = new Date().toLocaleString();
   }
 
 }

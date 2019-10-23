@@ -11,6 +11,7 @@ $(document).ready(function () {
     // Will be fixed in Bootstrap 4.1 - https://github.com/twbs/bootstrap/pull/24092
     Popper.Defaults.modifiers.computeStyle.gpuAcceleration = false;
 
+    $('.footable').footable();
 
     // Add body-small class if window less than 768px
     if ($(window).width() < 769) {
@@ -148,8 +149,6 @@ $(document).ready(function () {
         height: '100%'
     })
 });
-
-
 
 // Fixed Sidebar
 $(window).bind("load", function () {

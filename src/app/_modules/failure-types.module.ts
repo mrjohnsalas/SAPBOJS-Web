@@ -7,6 +7,7 @@ import { FailureTypesListComponent } from '../components/failure-types/failure-t
 import { FailureTypesDetailComponent } from '../components/failure-types/failure-types-detail/failure-types-detail.component';
 import { FailureTypesFormComponent } from '../components/failure-types/failure-types-form/failure-types-form.component';
 import { BreadcrumbComponent } from '../components/breadcrumb/breadcrumb.component';
+import { FailureTypeService } from '../_services/failure-type.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,9 @@ import { BreadcrumbComponent } from '../components/breadcrumb/breadcrumb.compone
   imports: [
     CommonModule,
     FailureTypesRoutingModule
+  ],
+  providers: [
+    FailureTypeService
   ]
 })
 export class FailureTypesModule { }
