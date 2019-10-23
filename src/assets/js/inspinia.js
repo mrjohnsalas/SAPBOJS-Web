@@ -11,8 +11,6 @@ $(document).ready(function () {
     // Will be fixed in Bootstrap 4.1 - https://github.com/twbs/bootstrap/pull/24092
     Popper.Defaults.modifiers.computeStyle.gpuAcceleration = false;
 
-    $('.footable').footable();
-
     // Add body-small class if window less than 768px
     if ($(window).width() < 769) {
         $('body').addClass('body-small')
@@ -149,6 +147,22 @@ $(document).ready(function () {
         height: '100%'
     })
 });
+
+function setFootable(tableName) {
+    if (tableName) {
+        $('#' + tableName).footable();    
+    } else {
+        $('.footable').footable();
+    }
+};
+
+function footableIni(tableName) {
+    if (tableName) {
+        $('#' + tableName).trigger('footable_initialize');
+    } else {
+        $('.footable').trigger('footable_initialize');
+    }
+};
 
 // Fixed Sidebar
 $(window).bind("load", function () {

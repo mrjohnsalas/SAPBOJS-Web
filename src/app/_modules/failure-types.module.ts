@@ -8,6 +8,7 @@ import { FailureTypesDetailComponent } from '../components/failure-types/failure
 import { FailureTypesFormComponent } from '../components/failure-types/failure-types-form/failure-types-form.component';
 import { BreadcrumbComponent } from '../components/breadcrumb/breadcrumb.component';
 import { FailureTypeService } from '../_services/failure-type.service';
+import { LoadDataComponent } from '../components/load-data/load-data.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FailureTypeService } from '../_services/failure-type.service';
     FailureTypesListComponent,
     FailureTypesDetailComponent,
     FailureTypesFormComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    LoadDataComponent
   ],
   imports: [
     CommonModule,

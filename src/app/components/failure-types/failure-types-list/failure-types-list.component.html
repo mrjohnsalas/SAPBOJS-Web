@@ -23,8 +23,10 @@
 
                 <div class="ibox-content">
 
-                    <span class="text-muted small float-right">Ultima modificación: <i class="fa fa-clock-o"></i>
-                        {{ currentDate }}</span>
+                    <app-load-data *ngIf="isLoadData"></app-load-data>
+
+                    <span class="text-muted small float-right">Ultima modificación: <i class="fa fa-clock-o"></i>{{ currentDate }}</span>
+
                     <h2>Lista de Tipo de falla</h2>
 
                     <span class="pull-right small text-muted">{{ failureTypes ? failureTypes.length : 0 }} Elementos</span>
