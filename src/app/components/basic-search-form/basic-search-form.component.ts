@@ -9,7 +9,10 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 export class BasicSearchFormComponent implements OnInit {
 
   @Output()
-  sendEvent: EventEmitter<string> = new EventEmitter<string>();
+  sendEventSearch = new EventEmitter<string>();
+
+  @Output()
+  sendEventRefresh = new EventEmitter();
 
   searchText: string;
 
@@ -19,6 +22,10 @@ export class BasicSearchFormComponent implements OnInit {
   }
 
   search() {
-    this.sendEvent.emit(this.searchText);
+    this.sendEventSearch.emit(this.searchText);
+  }
+
+  refresh() {
+    this.sendEventRefresh.emit();
   }
 }

@@ -11,6 +11,7 @@ import { BreadcrumbComponent } from '../components/breadcrumb/breadcrumb.compone
 import { FailureTypeService } from '../_services/failure-type.service';
 import { LoadDataComponent } from '../components/load-data/load-data.component';
 import { SpinnerComponent } from '../components/spinner/spinner.component';
+import { SpinnerOverlayWrapperComponent } from '../components/spinner-overlay-wrapper/spinner-overlay-wrapper.component';
 import { StatusLabelComponent } from '../components/status-label/status-label.component';
 import { BasicSearchFormComponent } from '../components/basic-search-form/basic-search-form.component';
 
@@ -23,6 +24,7 @@ import { BasicSearchFormComponent } from '../components/basic-search-form/basic-
     BreadcrumbComponent,
     LoadDataComponent,
     SpinnerComponent,
+    SpinnerOverlayWrapperComponent,
     StatusLabelComponent,
     BasicSearchFormComponent
   ],

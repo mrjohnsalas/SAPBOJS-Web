@@ -28,46 +28,48 @@
 
                     <h2>Lista de Tipo de falla</h2>
 
-                    <app-basic-search-form (sendEvent)="getSearchText($event)"></app-basic-search-form>
+                    <app-basic-search-form (sendEventSearch)="getSearchText($event)" (sendEventRefresh)="refreshData()">
+                    </app-basic-search-form>
 
                     <span class="pull-right small text-muted">{{ failureTypes ? failureTypes.length : 0 }}
                         Elementos</span>
-                    
-                    <table class="footable table toggle-arrow-tiny table-hover" data-page-size="30"
-                        data-striping="false">
-                        <thead>
-                            <tr>
-                                <th class="text-center" data-hide="phone">Tipo de falla Id</th>
-                                <th class="text-center" data-toggle="true">Tipo de falla</th>
-                                <th class="text-center" data-hide="all">Descripción</th>
-                                <th class="text-center" data-hide="phone">Estado</th>
-                                <th class="text-center">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngIf="isLoadData">
-                                <td colspan="5">
-                                    <app-spinner [selectedSpinner]="spinnerType.DoubleBounce"></app-spinner>
-                                </td>
-                            </tr>
-                            <tr *ngFor="let item of failureTypes">
-                                <td class="text-center">{{ item.id }}</td>
-                                <td>{{ item.name }}</td>
-                                <td>{{ item.description }}</td>
-                                <td class="text-center">
-                                    <app-status-label [selectedEntity]="entityType.FailureType" [selectedStatus]="item.statusId"></app-status-label>
-                                </td>
-                                <td class="text-right"></td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="12">
-                                    <ul class="pagination pull-right"></ul>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
+
+                    <app-spinner-overlay-wrapper [selectedSpinner]="spinnerType.DoubleBounce" [showSpinner]="isLoadingData">
+
+                            <table class="footable table toggle-arrow-tiny table-hover" data-page-size="30"
+                            data-striping="false" data-filter="#txtSearch" data-filter-min="1">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" data-hide="phone">Tipo de falla Id</th>
+                                    <th class="text-center" data-toggle="true">Tipo de falla</th>
+                                    <th class="text-center" data-hide="all">Descripción</th>
+                                    <th class="text-center" data-hide="phone">Estado</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of failureTypes">
+                                    <td class="text-center">{{ item.id }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.description }}</td>
+                                    <td class="text-center">
+                                        <app-status-label [selectedEntity]="entityType.FailureType"
+                                            [selectedStatus]="item.statusId"></app-status-label>
+                                    </td>
+                                    <td class="text-right"></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="12">
+                                        <ul class="pagination pull-right"></ul>
+                                    </td>
+                                </tr>
+                            </tfoot>
+    
+                        </table>
+
+                    </app-spinner-overlay-wrapper>
 
                 </div>
             </div>

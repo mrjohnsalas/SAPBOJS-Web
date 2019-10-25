@@ -20,9 +20,11 @@ button:focus {
   font-size: .8rem;
 }
 
-.float-e-margins .btn {
-  margin-bottom: 5px;
-}
+//Se comenta por que afecta el diseño de los input-groups 
+//boton mas pequeño que la caja de texto
+// .float-e-margins .btn {
+//   margin-bottom: 5px;
+// }
 
 .btn-w-m {
   min-width: 120px;

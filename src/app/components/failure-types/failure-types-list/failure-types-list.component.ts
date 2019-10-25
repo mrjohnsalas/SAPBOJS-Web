@@ -16,7 +16,7 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
 
   failureTypes: FailureType[];
   currentDate: string;
-  isLoadData = false;
+  isLoadingData = false;
   entityType = EntityType;
   spinnerType = SpinnerType;
   searchText = '';
@@ -24,7 +24,7 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
   constructor(private failureTypeService: FailureTypeService) { }
 
   ngOnInit() {
-    this.isLoadData = true;
+    this.isLoadingData = true;
     this.loadData();
   }
 
@@ -34,13 +34,24 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
 
   loadData() {
     this.failureTypeService.getFailureTypes().subscribe(
-      objs => { this.failureTypes = objs; this.isLoadData = false; },
-      error => console.error(error));
-    this.currentDate = new Date().toLocaleString();
+      objs => { this.failureTypes = objs; },
+      error => console.error(error),
+      () => this.stopLoading() );
   }
 
   getSearchText(searchText: string) {
     this.searchText = searchText;
+  }
+
+  refreshData() {
+    this.isLoadingData = true;
+    this.loadData();
+  }
+
+  stopLoading() {
+    this.isLoadingData = false;
+    this.currentDate = new Date().toLocaleString();
+    footableIni('');
   }
 
 }
