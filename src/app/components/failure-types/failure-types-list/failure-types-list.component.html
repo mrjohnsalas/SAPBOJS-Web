@@ -23,15 +23,19 @@
 
                 <div class="ibox-content">
 
-                    <app-load-data *ngIf="isLoadData"></app-load-data>
-
-                    <span class="text-muted small float-right">Ultima modificación: <i class="fa fa-clock-o"></i>{{ currentDate }}</span>
+                    <span class="text-muted small float-right">Ultima modificación: <i
+                            class="fa fa-clock-o"></i>{{ currentDate }}</span>
 
                     <h2>Lista de Tipo de falla</h2>
 
-                    <span class="pull-right small text-muted">{{ failureTypes ? failureTypes.length : 0 }} Elementos</span>
+                    <app-basic-search-form [sendEvent]="getSearchText($event)"></app-basic-search-form>
 
-                    <table class="footable table toggle-arrow-tiny table-hover" data-page-size="30" data-striping="false">
+                    <span class="pull-right small text-muted">{{ failureTypes ? failureTypes.length : 0 }}
+                        Elementos</span>
+
+                    <p>{{ searchText }}</p>
+                    <table class="footable table toggle-arrow-tiny table-hover" data-page-size="30"
+                        data-striping="false">
                         <thead>
                             <tr>
                                 <th class="text-center" data-hide="phone">Tipo de falla Id</th>
@@ -42,11 +46,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr *ngIf="isLoadData">
+                                <td colspan="5">
+                                    <app-spinner [selectedSpinner]="spinnerType.DoubleBounce"></app-spinner>
+                                </td>
+                            </tr>
                             <tr *ngFor="let item of failureTypes">
                                 <td class="text-center">{{ item.id }}</td>
                                 <td>{{ item.name }}</td>
                                 <td>{{ item.description }}</td>
-                                <td class="text-center">{{ item.statusId }}</td>
+                                <td class="text-center">
+                                    <app-status-label [selectedEntity]="entityType.FailureType" [selectedStatus]="item.statusId"></app-status-label>
+                                </td>
                                 <td class="text-right"></td>
                             </tr>
                         </tbody>

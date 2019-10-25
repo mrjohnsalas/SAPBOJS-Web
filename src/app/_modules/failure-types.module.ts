@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FailureTypesRoutingModule } from './failure-types-routing.module';
 import { FailureTypesComponent } from '../components/failure-types/failure-types.component';
@@ -9,6 +10,9 @@ import { FailureTypesFormComponent } from '../components/failure-types/failure-t
 import { BreadcrumbComponent } from '../components/breadcrumb/breadcrumb.component';
 import { FailureTypeService } from '../_services/failure-type.service';
 import { LoadDataComponent } from '../components/load-data/load-data.component';
+import { SpinnerComponent } from '../components/spinner/spinner.component';
+import { StatusLabelComponent } from '../components/status-label/status-label.component';
+import { BasicSearchFormComponent } from '../components/basic-search-form/basic-search-form.component';
 
 @NgModule({
   declarations: [
@@ -17,11 +21,16 @@ import { LoadDataComponent } from '../components/load-data/load-data.component';
     FailureTypesDetailComponent,
     FailureTypesFormComponent,
     BreadcrumbComponent,
-    LoadDataComponent
+    LoadDataComponent,
+    SpinnerComponent,
+    StatusLabelComponent,
+    BasicSearchFormComponent
   ],
   imports: [
     CommonModule,
-    FailureTypesRoutingModule
+    FailureTypesRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     FailureTypeService
