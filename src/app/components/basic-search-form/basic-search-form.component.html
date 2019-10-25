@@ -3,10 +3,10 @@
     <div class="col-lg-12">
         <div class="form-group">
 
-            <label class="control-label">Buscar</label>
+            <label class="control-label"><strong>Buscar</strong></label>
 
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar" (input)="searchText = $event.target.value">
+                <input type="text" class="form-control" placeholder="Buscar" [(ngModel)]="searchText">
                 <span class="input-group-append">
                     <button class="btn btn-primary" (click)="search()">
                         <i class="fa fa-search"></i> Buscar

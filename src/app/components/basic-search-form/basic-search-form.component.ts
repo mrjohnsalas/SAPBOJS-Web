@@ -8,11 +8,12 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class BasicSearchFormComponent implements OnInit {
 
-  constructor() { }
-
   @Output()
   sendEvent: EventEmitter<string> = new EventEmitter<string>();
+
   searchText: string;
+
+  constructor() { }
 
   ngOnInit() {
   }

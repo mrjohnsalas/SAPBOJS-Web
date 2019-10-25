@@ -28,12 +28,11 @@
 
                     <h2>Lista de Tipo de falla</h2>
 
-                    <app-basic-search-form [sendEvent]="getSearchText($event)"></app-basic-search-form>
+                    <app-basic-search-form (sendEvent)="getSearchText($event)"></app-basic-search-form>
 
                     <span class="pull-right small text-muted">{{ failureTypes ? failureTypes.length : 0 }}
                         Elementos</span>
-
-                    <p>{{ searchText }}</p>
+                    
                     <table class="footable table toggle-arrow-tiny table-hover" data-page-size="30"
                         data-striping="false">
                         <thead>
