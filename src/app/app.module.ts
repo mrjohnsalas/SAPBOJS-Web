@@ -13,6 +13,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { OptionButtonBarComponent } from './components/option-button-bar/option-button-bar.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MenuComponent } from './components/menu/menu.component';
     HomeComponent,
     TopMenuComponent,
     FooterComponent,
-    MenuComponent
+    MenuComponent,
+    OptionButtonBarComponent
   ],
   imports: [
     BrowserModule,

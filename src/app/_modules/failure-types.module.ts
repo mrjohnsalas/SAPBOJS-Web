@@ -14,6 +14,7 @@ import { SpinnerComponent } from '../components/spinner/spinner.component';
 import { SpinnerOverlayWrapperComponent } from '../components/spinner-overlay-wrapper/spinner-overlay-wrapper.component';
 import { StatusLabelComponent } from '../components/status-label/status-label.component';
 import { BasicSearchFormComponent } from '../components/basic-search-form/basic-search-form.component';
+import { ShowOptionButtonBarDirective } from '../_directives/show-option-button-bar.directive';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BasicSearchFormComponent } from '../components/basic-search-form/basic-
     SpinnerComponent,
     SpinnerOverlayWrapperComponent,
     StatusLabelComponent,
-    BasicSearchFormComponent
+    BasicSearchFormComponent,
+    ShowOptionButtonBarDirective
   ],
   imports: [
     CommonModule,

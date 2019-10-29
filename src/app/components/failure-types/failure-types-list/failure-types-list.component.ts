@@ -3,6 +3,8 @@ import { FailureType } from '../../../_models/failure-type';
 import { FailureTypeService } from '../../../_services/failure-type.service';
 import { SpinnerType } from '../../../_models/spinner-type.enum';
 import { EntityType } from '../../../_models/entity-type.enum';
+import { OptionButtonBar } from '../../../_models/option-button-bar';
+import { StatusType } from '../../../_models/status-type.enum';
 
 declare function setFootable(tableName: string): any;
 declare function footableIni(tableName: string): any;
@@ -21,6 +23,7 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
   spinnerType = SpinnerType;
   searchText = '';
   tableName = 'ft-index';
+  optionButtonBar = new OptionButtonBar();
 
   constructor(private failureTypeService: FailureTypeService) { }
 
@@ -56,6 +59,22 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
 
   footableInit() {
     footableIni(this.tableName);
+  }
+
+  getOptionButtonBar(row: FailureType): OptionButtonBar {
+    this.optionButtonBar.showDetail = true;
+    this.optionButtonBar.pathDetail = '/details/' + row.id;
+    if (row.statusId === StatusType.Activo) {
+      this.optionButtonBar.showEdit = true;
+      this.optionButtonBar.pathEdit = '/edit/' + row.id;
+      this.optionButtonBar.showCancel = true;
+      this.optionButtonBar.pathCancel = '/delete/' + row.id;
+    }
+    return this.optionButtonBar;
+  }
+
+  print(index: number) {
+    console.log(index);
   }
 
 }

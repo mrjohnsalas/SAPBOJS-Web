@@ -1,0 +1,11 @@
+<div class="btn-group" *ngIf="optionButtonBar">
+    <a href="{{ optionButtonBar.pathDetail }}" class="btn btn-primary btn-sm" title="Detalle" *ngIf="optionButtonBar.showDetail">
+        <i class="fa fa-eye"></i>
+    </a>
+    <a href="{{ optionButtonBar.pathEdit }}" class="btn btn-white btn-sm" title="Editar" *ngIf="optionButtonBar.showEdit">
+        <i class="fa fa-pencil"></i>
+    </a>
+    <a href="{{ optionButtonBar.pathCancel }}" class="btn btn-danger btn-sm" title="Anular" *ngIf="optionButtonBar.showCancel">
+        <i class="fa fa-trash"></i>
+    </a>
+</div>
