@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 
 @Component({
@@ -14,6 +14,9 @@ export class BasicSearchFormComponent implements OnInit {
   @Output()
   sendEventRefresh = new EventEmitter();
 
+  @Input()
+  loadData = false;
+
   searchText: string;
 
   constructor() { }
@@ -22,10 +25,12 @@ export class BasicSearchFormComponent implements OnInit {
   }
 
   search() {
+    this.loadData = true;
     this.sendEventSearch.emit(this.searchText);
   }
 
   refresh() {
+    this.loadData = true;
     this.sendEventRefresh.emit();
   }
 }

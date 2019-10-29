@@ -120,7 +120,6 @@ $(document).ready(function () {
         event.preventDefault();
         $("body").toggleClass("mini-navbar");
         SmoothlyMenu();
-
     });
 
     // Tooltips demo
@@ -146,6 +145,8 @@ $(document).ready(function () {
     $('.full-height-scroll').slimscroll({
         height: '100%'
     })
+
+    setFootable('');
 });
 
 function setFootable(tableName) {

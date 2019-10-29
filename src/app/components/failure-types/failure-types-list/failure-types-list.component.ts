@@ -20,6 +20,7 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
   entityType = EntityType;
   spinnerType = SpinnerType;
   searchText = '';
+  tableName = 'ft-index';
 
   constructor(private failureTypeService: FailureTypeService) { }
 
@@ -29,7 +30,7 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setFootable('');
+    setFootable(this.tableName);
   }
 
   loadData() {
@@ -51,7 +52,10 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
   stopLoading() {
     this.isLoadingData = false;
     this.currentDate = new Date().toLocaleString();
-    footableIni('');
+  }
+
+  footableInit() {
+    footableIni(this.tableName);
   }
 
 }

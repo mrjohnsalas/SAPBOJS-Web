@@ -23,21 +23,18 @@
 
                 <div class="ibox-content">
 
-                    <span class="text-muted small float-right">Ultima modificación: <i
-                            class="fa fa-clock-o"></i>{{ currentDate }}</span>
+                    <span class="text-muted small float-right">Ultima modificación: <i class="fa fa-clock-o"></i>{{ currentDate }}</span>
 
                     <h2>Lista de Tipo de falla</h2>
 
-                    <app-basic-search-form (sendEventSearch)="getSearchText($event)" (sendEventRefresh)="refreshData()">
-                    </app-basic-search-form>
+                    <app-basic-search-form (sendEventSearch)="getSearchText($event)" (sendEventRefresh)="refreshData()" [loadData]="isLoadingData"></app-basic-search-form>
 
-                    <span class="pull-right small text-muted">{{ failureTypes ? failureTypes.length : 0 }}
-                        Elementos</span>
+                    <span class="pull-right small text-muted">{{ failureTypes ? failureTypes.length : 0 }} Elementos</span>
 
                     <app-spinner-overlay-wrapper [selectedSpinner]="spinnerType.DoubleBounce" [showSpinner]="isLoadingData">
 
                             <table class="footable table toggle-arrow-tiny table-hover" data-page-size="30"
-                            data-striping="false" data-filter="#txtSearch" data-filter-min="1">
+                            data-striping="false" data-filter="#txtSearch" data-filter-min="1" id="ft-index">
                             <thead>
                                 <tr>
                                     <th class="text-center" data-hide="phone">Tipo de falla Id</th>
@@ -48,15 +45,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of failureTypes">
+                                <tr *ngFor="let item of failureTypes; let last = last">
                                     <td class="text-center">{{ item.id }}</td>
                                     <td>{{ item.name }}</td>
                                     <td>{{ item.description }}</td>
                                     <td class="text-center">
-                                        <app-status-label [selectedEntity]="entityType.FailureType"
-                                            [selectedStatus]="item.statusId"></app-status-label>
+                                        <app-status-label 
+                                            [selectedEntity]="entityType.FailureType" [selectedStatus]="item.statusId">
+                                        </app-status-label>
                                     </td>
                                     <td class="text-right"></td>
+                                    <div class="d-none" *ngIf="last">{{ footableInit() }}</div>
                                 </tr>
                             </tbody>
                             <tfoot>

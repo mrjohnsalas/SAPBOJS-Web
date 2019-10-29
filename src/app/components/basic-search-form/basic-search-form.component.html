@@ -9,8 +9,8 @@
                 <input type="text" class="form-control" placeholder="Buscar" [(ngModel)]="searchText" id="txtSearch">
                 <span class="input-group-append">
                     <div class="btn-group">
-                        <button class="btn btn-primary" (click)="search()"><i class="fa fa-search"></i></button>
-                        <button class="btn btn-success" (click)="refresh()"><i class="fa fa-refresh"></i></button>
+                        <button class="btn btn-primary" (click)="search()" [ngClass]="{'disabled': loadData}"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-success" (click)="refresh()" [ngClass]="{'disabled': loadData}"><i class="fa fa-refresh"></i></button>
                     </div>
                 </span>
             </div>
