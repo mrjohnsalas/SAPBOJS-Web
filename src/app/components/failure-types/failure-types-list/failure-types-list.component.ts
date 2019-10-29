@@ -24,6 +24,7 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
   searchText = '';
   tableName = 'ft-index';
   optionButtonBar = new OptionButtonBar();
+  isOptionButtonBarVisible = false;
 
   constructor(private failureTypeService: FailureTypeService) { }
 

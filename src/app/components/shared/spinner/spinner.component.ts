@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SpinnerType } from '../../_models/spinner-type.enum';
+import { SpinnerType } from '../../../_models/spinner-type.enum';
 
 @Component({
   selector: 'app-spinner',

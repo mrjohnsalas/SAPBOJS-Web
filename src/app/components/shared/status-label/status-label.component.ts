@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { EntityType } from '../../_models/entity-type.enum';
-import { StatusType } from '../../_models/status-type.enum';
+import { EntityType } from '../../../_models/entity-type.enum';
+import { StatusType } from '../../../_models/status-type.enum';
 import { Utils } from 'src/app/_helpers/utils.helper';
 
 @Component({
