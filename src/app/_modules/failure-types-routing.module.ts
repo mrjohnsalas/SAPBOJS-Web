@@ -7,10 +7,10 @@ import { environment } from '../../environments/environment';
 import { FailureTypesFormComponent } from '../components/failure-types/failure-types-form/failure-types-form.component';
 
 const routes: Routes = [
-  { path: '', canActivateChild: [AuthGuard], data: { roles: environment.maintenanceRoles },
+  { path: '', canActivateChild: [AuthGuard], data: { roles: environment.maintenanceRoles, breadcrumb: 'Lista' },
     children: [
-      { path: '', component: FailureTypesListComponent, data: { breadcrumb: 'Lista' } },
-      { path: ':id', component: FailureTypesDetailComponent, data: { breadcrumb: 'Detalle' } },
+      { path: '', component: FailureTypesListComponent, data: { breadcrumb: null } },
+      { path: 'detail/:id', component: FailureTypesDetailComponent, data: { breadcrumb: 'Detalle' } },
       { path: 'create', component: FailureTypesFormComponent, data: { breadcrumb: 'Nuevo' } },
       { path: 'edit/:id', component: FailureTypesFormComponent, data: { breadcrumb: 'Editar' } } ] }
 ];

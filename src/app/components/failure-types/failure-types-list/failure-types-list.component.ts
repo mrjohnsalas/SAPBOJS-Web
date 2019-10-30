@@ -66,7 +66,7 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
 
   getOptionButtonBar(row: FailureType): OptionButtonBar {
     this.optionButtonBar.showDetail = true;
-    this.optionButtonBar.pathDetail = this.utils.getRouterLinkValue(this.parentPath, '', row.id);
+    this.optionButtonBar.pathDetail = this.utils.getRouterLinkValue(this.parentPath, 'detail', row.id);
     if (row.statusId === StatusType.Activo) {
       this.optionButtonBar.showEdit = true;
       this.optionButtonBar.pathEdit = this.utils.getRouterLinkValue(this.parentPath, 'edit', row.id);

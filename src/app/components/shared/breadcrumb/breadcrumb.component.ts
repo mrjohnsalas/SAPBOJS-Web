@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BreadCrumb } from 'src/app/_models/breadcrumb';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { filter, distinctUntilChanged } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -18,7 +19,7 @@ export class BreadcrumbComponent implements OnInit {
 
   ngOnInit() {
     this.router.events
-    .pipe(filter(event => event instanceof NavigationEnd), distinctUntilChanged())
+    .pipe(filter(event => event instanceof NavigationEnd))
     .subscribe(() => this.breadcrumbs = this.buildBreadCrumb(this.activatedRoute.root));
   }
 
@@ -28,7 +29,8 @@ export class BreadcrumbComponent implements OnInit {
 
     const lastRoutePart = path.split('/').pop();
     const isDynamicRoute = lastRoutePart.startsWith(':');
-    if(isDynamicRoute && !!route.snapshot) {
+
+    if (isDynamicRoute && !!route.snapshot) {
       const paramName = lastRoutePart.split(':')[1];
       path = path.replace(lastRoutePart, route.snapshot.params[paramName]);
       label = route.snapshot.params[paramName];
@@ -37,7 +39,7 @@ export class BreadcrumbComponent implements OnInit {
     const nextUrl = path ? `${url}/${path}` : url;
     const breadcrumb: BreadCrumb = {
         label,
-        url: nextUrl,
+        url: nextUrl
     };
 
     const newBreadcrumbs = breadcrumb.label ? [ ...breadcrumbs, breadcrumb ] : [ ...breadcrumbs];
@@ -47,4 +49,25 @@ export class BreadcrumbComponent implements OnInit {
     return newBreadcrumbs;
   }
 
+  buildBreadCrumb2(route: ActivatedRoute, url: string = '', breadcrumbs: BreadCrumb[] = []): BreadCrumb[] {
+    const children: ActivatedRoute[] = route.children;
+
+    if (children.length === 0) {
+      return breadcrumbs;
+    }
+
+    for (const child of children) {
+      const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
+      if (routeURL !== '') {
+        url += `/${routeURL}`;
+      }
+
+      const label = child.snapshot.data.breadcrumb;
+      if (!isNullOrUndefined(label)) {
+        breadcrumbs.push({label, url});
+      }
+
+      return this.buildBreadCrumb2(child, url, breadcrumbs);
+    }
+  }
 }

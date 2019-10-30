@@ -34,4 +34,12 @@ export class FailureTypesFormComponent implements OnInit {
     });
   }
 
+  submit() {
+
+  }
+
+  cancel() {
+
+  }
+
 }

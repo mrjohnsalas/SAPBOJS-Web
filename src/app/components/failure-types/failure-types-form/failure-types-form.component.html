@@ -1,1 +1,63 @@
-<p>failure-types-form works!</p>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>Tipo de falla</h2>
+        <app-breadcrumb></app-breadcrumb>
+    </div>
+    <div class="col-lg-4">
+        <div class="title-action">
+            <a [routerLink]='["/failuretypes/"]' class="btn btn-primary btn-sm" title="Volver a la lista"><i class="fa fa-arrow-left"></i> Volver a la lista</a>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-title">
+                    <h5>Crear Tipo de falla</h5>
+
+                    <div class="ibox-tools">
+
+                    </div>
+
+                </div>
+
+                <div class="ibox-content">
+
+                    <form (submit)="submit()">
+
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-2 col-form-label text-sm-right">Tipo de falla:</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" placeholder="Nombre" name="name">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-2 col-form-label text-sm-right">Descripción:</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" placeholder="Descripción" name="description">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-4 offset-sm-2">
+                                <button type="button" class="btn btn-white btn-sm" (click)="cancel()">
+                                    <i class="fa fa-times"></i> Cancelar
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-sm ml-1">
+                                    <i class="fa fa-floppy-o"></i> Crear
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

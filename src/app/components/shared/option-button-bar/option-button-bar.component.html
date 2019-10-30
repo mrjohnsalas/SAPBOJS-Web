@@ -1,11 +1,11 @@
 <div class="btn-group" *ngIf="optionButtonBar && (optionButtonBar.showDetail || optionButtonBar.showEdit || optionButtonBar.showCancel)">
-    <a [routerLink]="optionButtonBar.pathDetail" class="btn btn-primary btn-sm" title="Detalle" *ngIf="optionButtonBar.showDetail">
+    <a [routerLink]="optionButtonBar.pathDetail" class="btn btn-primary btn-xs" title="Detalle" *ngIf="optionButtonBar.showDetail">
         <i class="fa fa-eye"></i>
     </a>
-    <a [routerLink]="optionButtonBar.pathEdit" class="btn btn-white btn-sm" title="Editar" *ngIf="optionButtonBar.showEdit">
+    <a [routerLink]="optionButtonBar.pathEdit" class="btn btn-default btn-xs" title="Editar" *ngIf="optionButtonBar.showEdit">
         <i class="fa fa-pencil"></i>
     </a>
-    <a [routerLink]="optionButtonBar.pathCancel" class="btn btn-danger btn-sm" title="Anular" *ngIf="optionButtonBar.showCancel">
+    <a [routerLink]="optionButtonBar.pathCancel" class="btn btn-danger btn-xs" title="Anular" *ngIf="optionButtonBar.showCancel">
         <i class="fa fa-trash"></i>
     </a>
 </div>
