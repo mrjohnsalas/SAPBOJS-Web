@@ -1,11 +1,11 @@
-<div class="btn-group" *ngIf="optionButtonBar">
-    <a href="{{ optionButtonBar.pathDetail }}" class="btn btn-primary btn-sm" title="Detalle" *ngIf="optionButtonBar.showDetail">
+<div class="btn-group" *ngIf="optionButtonBar && (optionButtonBar.showDetail || optionButtonBar.showEdit || optionButtonBar.showCancel)">
+    <a [routerLink]="['/failuretypes/', optionButtonBar.id]" class="btn btn-primary btn-sm" title="Detalle" *ngIf="optionButtonBar.showDetail">
         <i class="fa fa-eye"></i>
     </a>
-    <a href="{{ optionButtonBar.pathEdit }}" class="btn btn-white btn-sm" title="Editar" *ngIf="optionButtonBar.showEdit">
+    <a [routerLink]="['/failuretypes/edit/', optionButtonBar.id]" class="btn btn-white btn-sm" title="Editar" *ngIf="optionButtonBar.showEdit">
         <i class="fa fa-pencil"></i>
     </a>
-    <a href="{{ optionButtonBar.pathCancel }}" class="btn btn-danger btn-sm" title="Anular" *ngIf="optionButtonBar.showCancel">
+    <a [routerLink]="['/failuretypes/delete/', optionButtonBar.id]" class="btn btn-danger btn-sm" title="Anular" *ngIf="optionButtonBar.showCancel">
         <i class="fa fa-trash"></i>
     </a>
 </div>

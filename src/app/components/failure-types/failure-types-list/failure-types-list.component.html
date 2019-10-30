@@ -17,8 +17,9 @@
                     <h5>Lista de Tipo de falla</h5>
 
                     <div class="ibox-tools">
-
+                        <a [routerLink]='["/failuretypes/create"]' class="btn btn-primary btn-undefined" title="Nuevo"><i class="fa fa-plus"></i> Crear nuevo</a>
                     </div>
+
                 </div>
 
                 <div class="ibox-content">
@@ -54,7 +55,9 @@
                                             [selectedEntity]="entityType.FailureType" [selectedStatus]="item.statusId">
                                         </app-status-label>
                                     </td>
-                                    <td class="text-right"></td>
+                                    <td class="text-right">
+                                        <app-option-button-bar [optionButtonBar]="getOptionButtonBar(item)"></app-option-button-bar>
+                                    </td>
                                     <div class="d-none" *ngIf="last">{{ footableInit() }}</div>
                                 </tr>
                             </tbody>

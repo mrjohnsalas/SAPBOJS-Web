@@ -11,21 +11,21 @@ export class OptionButtonBarComponent implements OnInit {
   @Input()
   optionButtonBar: OptionButtonBar;
 
-  isOptionButtonBarVisible = false;
+  // isOptionButtonBarVisible = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  @HostListener('mouseenter') onMouseEnter() {
-    this.isOptionButtonBarVisible = true;
-    console.log(this.isOptionButtonBarVisible);
-  }
+  // @HostListener('mouseenter') onMouseEnter() {
+  //   this.isOptionButtonBarVisible = true;
+  //   console.log(this.isOptionButtonBarVisible);
+  // }
 
-  @HostListener('mouseleave') onMouseLeave() {
-    this.isOptionButtonBarVisible = false;
-    console.log(this.isOptionButtonBarVisible);
-  }
+  // @HostListener('mouseleave') onMouseLeave() {
+  //   this.isOptionButtonBarVisible = false;
+  //   console.log(this.isOptionButtonBarVisible);
+  // }
 
 }

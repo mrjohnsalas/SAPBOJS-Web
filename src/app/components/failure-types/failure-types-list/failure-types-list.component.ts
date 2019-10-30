@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { FailureType } from '../../../_models/failure-type';
 import { FailureTypeService } from '../../../_services/failure-type.service';
 import { SpinnerType } from '../../../_models/spinner-type.enum';
@@ -24,13 +24,13 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
   searchText = '';
   tableName = 'ft-index';
   optionButtonBar = new OptionButtonBar();
-  isOptionButtonBarVisible = false;
 
   constructor(private failureTypeService: FailureTypeService) { }
 
   ngOnInit() {
     this.isLoadingData = true;
     this.loadData();
+    this.optionButtonBar.parentPath = '/failuretypes';
   }
 
   ngAfterViewInit(): void {
@@ -63,19 +63,16 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
   }
 
   getOptionButtonBar(row: FailureType): OptionButtonBar {
+    this.optionButtonBar.id = row.id;
     this.optionButtonBar.showDetail = true;
-    this.optionButtonBar.pathDetail = '/details/' + row.id;
+    this.optionButtonBar.pathDetail = '["/failuretypes/", ' + row.id.toString() + ']';
     if (row.statusId === StatusType.Activo) {
       this.optionButtonBar.showEdit = true;
-      this.optionButtonBar.pathEdit = '/edit/' + row.id;
+      this.optionButtonBar.pathEdit = this.optionButtonBar.parentPath + '/edit/';
       this.optionButtonBar.showCancel = true;
-      this.optionButtonBar.pathCancel = '/delete/' + row.id;
+      this.optionButtonBar.pathCancel = this.optionButtonBar.parentPath + '/delete/';
     }
     return this.optionButtonBar;
-  }
-
-  print(index: number) {
-    console.log(index);
   }
 
 }

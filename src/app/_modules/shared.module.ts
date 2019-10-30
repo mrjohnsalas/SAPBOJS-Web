@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { LoadDataComponent } from '../components/shared/load-data/load-data.component';
 import { SpinnerComponent } from '../components/shared/spinner/spinner.component';
@@ -22,11 +23,13 @@ import { BreadcrumbComponent } from '../components/shared/breadcrumb/breadcrumb.
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   exports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     BreadcrumbComponent,
     LoadDataComponent,
     SpinnerComponent,
