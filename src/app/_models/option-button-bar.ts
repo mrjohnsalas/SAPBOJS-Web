@@ -2,12 +2,10 @@ import { RouterLinkWithHref } from '@angular/router';
 
 export class OptionButtonBar {
     showDetail: boolean;
-    pathDetail: any;
     showEdit: boolean;
-    pathEdit: string;
     showCancel: boolean;
+
+    pathDetail: string;
+    pathEdit: string;
     pathCancel: string;
-    parentPath: string;
-    actionPath: string;
-    id: any;
 }

@@ -23,4 +23,13 @@ export class Utils {
         }
     }
 
+    getRouterLinkValue(parentPath: string, action: string, id: any): string {
+        let path = '/' + parentPath + '/';
+        if (action) {
+            path += action + '/';
+        }
+        path += id;
+        return path;
+    }
+
 }
