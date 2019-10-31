@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     body.classList.remove('gray-bg');
   }
 
-  get f() { return this.loginForm.controls; }
+  public get f() { return this.loginForm.controls; }
 
   onSubmit() {
     this.submitted = true;

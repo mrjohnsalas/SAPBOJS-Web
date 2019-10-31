@@ -12,7 +12,7 @@ export class MenuComponent {
 
   currentUser: User;
 
-  constructor(private router: Router, private authenticationService: AuthenticationService) {
+  constructor(public router: Router, public authenticationService: AuthenticationService) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 

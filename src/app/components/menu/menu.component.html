@@ -22,7 +22,7 @@
             </li>
 
             <!-- AllUsers -->
-            <li [ngClass]="{'active': router.isActive('') || router.isActive('home')}">
+            <li [ngClass]="{'active': router.isActive('', true) || router.isActive('home', true)}">
                 <a routerLink="home"><i class="fa fa-tachometer"></i> <span class="nav-label">Dashboard</span></a>
             </li>
 
