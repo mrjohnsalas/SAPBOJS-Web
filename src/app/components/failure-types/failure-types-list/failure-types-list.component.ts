@@ -40,7 +40,7 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
   }
 
   loadData() {
-    this.failureTypeService.getFailureTypes().subscribe(
+    this.failureTypeService.getAll().subscribe(
       objs => { this.failureTypes = objs; },
       error => console.error(error),
       () => this.stopLoading() );

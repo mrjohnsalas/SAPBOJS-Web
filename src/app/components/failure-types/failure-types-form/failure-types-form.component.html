@@ -5,7 +5,9 @@
     </div>
     <div class="col-lg-4">
         <div class="title-action">
-            <a [routerLink]='["/failuretypes/"]' class="btn btn-primary btn-sm" title="Volver a la lista"><i class="fa fa-arrow-left"></i> Volver a la lista</a>
+            <button type="button" class="btn btn-primary btn-sm" title="Volver a la lista"
+                    [routerLink]='["/failuretypes/"]' [disabled]="isLoadingData">
+                    <i class="fa fa-arrow-left"></i> Volver a la lista</button>
         </div>
     </div>
 </div>
@@ -16,7 +18,7 @@
             <div class="ibox float-e-margins">
 
                 <div class="ibox-title">
-                    <h5>Crear Tipo de falla</h5>
+                    <h5>{{ editMode ? 'Editar' : 'Crear'}} Tipo de falla</h5>
 
                     <div class="ibox-tools">
 
@@ -26,34 +28,60 @@
 
                 <div class="ibox-content">
 
-                    <form (submit)="submit()">
+                    <app-spinner-overlay-wrapper [selectedSpinner]="spinnerType.DoubleBounce" [showSpinner]="isLoadingData">
 
-                        <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label text-sm-right">Tipo de falla:</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Nombre" name="name">
+                        <form (submit)="submit()" [formGroup]="formGroup">
+
+                            <div class="form-group row"
+                                [ngClass]="{'has-error': name.invalid && (name.dirty || name.touched)}">
+                                <label for="name" class="col-sm-2 col-form-label text-sm-right control-label">Tipo de
+                                    falla:</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" placeholder="Nombre" formControlName="name">
+
+                                    <span class="text-danger" *ngIf="(name.dirty || name.touched) && name.errors">
+                                        <span *ngIf="name.errors.required">Este campo es requerido.</span>
+                                        <span *ngIf="name.errors.maxlength">La longitud máxima de este campo es: 30
+                                            caracteres.</span>
+                                    </span>
+
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="description" class="col-sm-2 col-form-label text-sm-right">Descripción:</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Descripción" name="description">
+                            <div class="form-group row"
+                                [ngClass]="{'has-error': description.invalid && (description.dirty || description.touched)}">
+                                <label for="description"
+                                    class="col-sm-2 col-form-label text-sm-right control-label">Descripción:</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" placeholder="Descripción"
+                                        formControlName="description">
+
+                                    <span class="text-danger"
+                                        *ngIf="(description.dirty || description.touched) && description.errors">
+                                        <span *ngIf="description.errors.maxlength">La longitud máxima de este campo es:
+                                            100
+                                            caracteres.</span>
+                                    </span>
+
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <div class="col-sm-4 offset-sm-2">
-                                <button type="button" class="btn btn-white btn-sm" (click)="cancel()">
-                                    <i class="fa fa-times"></i> Cancelar
-                                </button>
-                                <button type="submit" class="btn btn-primary btn-sm ml-1">
-                                    <i class="fa fa-floppy-o"></i> Crear
-                                </button>
+                            <div class="form-group row">
+                                <div class="col-sm-4 offset-sm-2">
+                                    <button type="button" class="btn btn-white btn-sm"
+                                        [routerLink]='["/failuretypes/"]'>
+                                        <i class="fa fa-times"></i> Cancelar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary btn-sm ml-1"
+                                        [disabled]="formGroup.invalid">
+                                        <i class="fa fa-floppy-o"></i> {{ editMode ? 'Editar' : 'Crear'}}
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
-                    </form>
+                        </form>
+
+                    </app-spinner-overlay-wrapper>
 
                 </div>
 

@@ -13,7 +13,23 @@ export class FailureTypeService {
 
   constructor(private http: HttpClient) { }
 
-  getFailureTypes(): Observable<FailureType[]> {
+  getAll(): Observable<FailureType[]> {
     return this.http.get<FailureType[]>(this.baseUrl);
+  }
+
+  get(id: number): Observable<FailureType> {
+    return this.http.get<FailureType>(`${this.baseUrl}/${id}`);
+  }
+
+  create(failureType: FailureType): Observable<FailureType> {
+    return this.http.post<FailureType>(this.baseUrl, failureType);
+  }
+
+  update(failureType: FailureType): Observable<FailureType> {
+    return this.http.put<FailureType>(`${this.baseUrl}/${failureType.id}`, failureType);
+  }
+
+  delete(id: number): Observable<FailureType> {
+    return this.http.delete<FailureType>(`${this.baseUrl}/${id}`);
   }
 }

@@ -33,6 +33,7 @@
               "./node_modules/font-awesome/css/font-awesome.min.css",
               "./node_modules/footable/css/footable.core.min.css",
               "./node_modules/animate.css/animate.min.css",
+              "./node_modules/toastr/build/toastr.min.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -42,6 +43,7 @@
               "./node_modules/metismenu/dist/metisMenu.min.js",
               "./node_modules/footable/dist/footable.all.min.js",
               "./node_modules/jquery-slimscroll/jquery.slimscroll.min.js",
+              "./node_modules/toastr/build/toastr.min.js",
               "src/assets/js/inspinia.js",
               "./node_modules/pace-js/pace.min.js"
             ]

@@ -17,7 +17,9 @@
                     <h5>Lista de Tipo de falla</h5>
 
                     <div class="ibox-tools">
-                        <a [routerLink]='["/failuretypes/create"]' class="btn btn-primary btn-sm" title="Nuevo"><i class="fa fa-plus"></i> Crear nuevo</a>
+                        <button type="button" class="btn btn-primary btn-sm" title="Nuevo"
+                        [routerLink]='["/failuretypes/create"]' [disabled]="isLoadingData">
+                        <i class="fa fa-plus"></i> Crear nuevo</button>
                     </div>
 
                 </div>
@@ -28,7 +30,7 @@
 
                     <h2>Lista de Tipo de falla</h2>
 
-                    <app-basic-search-form (sendEventSearch)="getSearchText($event)" (sendEventRefresh)="refreshData()" [loadData]="isLoadingData"></app-basic-search-form>
+                    <app-basic-search-form (sendEventSearch)="getSearchText($event)" (sendEventRefresh)="refreshData()" [isLoadingData]="isLoadingData"></app-basic-search-form>
 
                     <span class="pull-right small text-muted">{{ failureTypes ? failureTypes.length : 0 }} Elementos</span>
 

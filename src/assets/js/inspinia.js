@@ -147,7 +147,45 @@ $(document).ready(function () {
     })
 
     setFootable('');
+
+    toastrInit();
 });
+
+function toastrInit() {
+    toastr.options = {
+        closeButton: true,
+        debug: false,
+        progressBar: true,
+        positionClass: "toast-top-right",
+        onclick: null,
+        showDuration: 400,
+        hideDuration: 1000,
+        timeOut: 8000,
+        extendedTimeOut: 1000,
+
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut"
+    };
+};
+
+function sendToastr(toastrType, message, title) {
+    switch(toastrType) {
+        case 1: //Info
+            toastr.info(message, title);
+            break;
+        case 2: //Warning
+            toastr.warning(message, title);
+            break;
+        case 3: //Error
+            toastr.error(message, title);
+            break;
+        case 0:
+        default:
+            toastr.success(message, title);
+    }
+};
 
 function setFootable(tableName) {
     if (tableName) {
@@ -325,5 +363,3 @@ function WinMove() {
         })
         .disableSelection();
 }
-
-
