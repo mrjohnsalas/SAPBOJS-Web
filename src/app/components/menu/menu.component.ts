@@ -20,4 +20,5 @@ export class MenuComponent {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
   }
+
 }

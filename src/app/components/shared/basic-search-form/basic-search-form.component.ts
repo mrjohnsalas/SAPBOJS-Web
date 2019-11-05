@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
-
 @Component({
   selector: 'app-basic-search-form',
   templateUrl: './basic-search-form.component.html',

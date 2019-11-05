@@ -19,11 +19,7 @@ $(document).ready(function () {
     }
 
     // MetisMenu
-    var sideMenu = $('#side-menu').metisMenu();
-
-    sideMenu.on('shown.metisMenu', function (e) {
-        fix_height();
-    });
+    metisMenuInit();
 
     // Collapse ibox function
     $('.collapse-link').on('click', function (e) {
@@ -68,10 +64,7 @@ $(document).ready(function () {
     });
 
     // Run menu of canvas
-    $('body.canvas-menu .sidebar-collapse').slimScroll({
-        height: '100%',
-        railOpacity: 0.9
-    });
+    runMenuOfCanvas();
 
     // Open close right sidebar
     $('.right-sidebar-toggle').on('click', function (e) {
@@ -80,11 +73,7 @@ $(document).ready(function () {
     });
 
     // Initialize slimscroll for right sidebar
-    $('.sidebar-container').slimScroll({
-        height: '100%',
-        railOpacity: 0.4,
-        wheelStep: 10
-    });
+    initializeSlimscrollForRightSidebar();
 
     // Open close small chat
     $('.open-small-chat').on('click', function (e) {
@@ -94,10 +83,7 @@ $(document).ready(function () {
     });
 
     // Initialize slimscroll for small chat
-    $('.small-chat-box .content').slimScroll({
-        height: '234px',
-        railOpacity: 0.4
-    });
+    initializeSlimscrollForSmallChat();
 
     // Small todo handler
     $('.check-link').on('click', function () {
@@ -123,11 +109,7 @@ $(document).ready(function () {
     });
 
     // Tooltips demo
-    $('.tooltip-demo').tooltip({
-        selector: "[data-toggle=tooltip]",
-        container: "body"
-    });
-
+    tooltipsInit();
 
     // Move right sidebar top after scroll
     $(window).scroll(function () {
@@ -138,18 +120,63 @@ $(document).ready(function () {
         }
     });
 
-    $("[data-toggle=popover]")
-        .popover();
+    // Popover
+    popoverInit();
 
     // Add slimscroll to element
-    $('.full-height-scroll').slimscroll({
-        height: '100%'
-    })
+    addSlimscrollToElement(); 
 
     setFootable('');
 
     toastrInit();
 });
+
+function runMenuOfCanvas() {
+    $('body.canvas-menu .sidebar-collapse').slimScroll({
+        height: '100%',
+        railOpacity: 0.9
+    });
+}
+
+function initializeSlimscrollForRightSidebar() {
+    $('.sidebar-container').slimScroll({
+        height: '100%',
+        railOpacity: 0.4,
+        wheelStep: 10
+    });
+}
+
+function initializeSlimscrollForSmallChat() {
+    $('.small-chat-box .content').slimScroll({
+        height: '234px',
+        railOpacity: 0.4
+    });
+}
+
+function tooltipsInit() {
+    $('.tooltip-demo').tooltip({
+        selector: "[data-toggle=tooltip]",
+        container: "body"
+    });
+}
+
+function popoverInit() {
+    $("[data-toggle=popover]").popover();
+}
+
+function addSlimscrollToElement() {
+    $('.full-height-scroll').slimscroll({
+        height: '100%'
+    })
+}
+
+function metisMenuInit() {
+
+    $('#side-menu').metisMenu()
+    .on('shown.metisMenu', function(event) {
+        fix_height();
+    });
+}
 
 function toastrInit() {
     toastr.options = {
