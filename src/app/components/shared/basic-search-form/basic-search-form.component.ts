@@ -11,7 +11,7 @@ export class BasicSearchFormComponent implements OnInit {
   sendEventSearch = new EventEmitter<string>();
 
   @Output()
-  sendEventRefresh = new EventEmitter();
+  sendEventRefresh = new EventEmitter<string>();
 
   @Input()
   isLoadingData = false;
@@ -24,12 +24,10 @@ export class BasicSearchFormComponent implements OnInit {
   }
 
   search() {
-    this.isLoadingData = true;
     this.sendEventSearch.emit(this.searchText);
   }
 
   refresh() {
-    this.isLoadingData = true;
-    this.sendEventRefresh.emit();
+    this.sendEventRefresh.emit(this.searchText);
   }
 }

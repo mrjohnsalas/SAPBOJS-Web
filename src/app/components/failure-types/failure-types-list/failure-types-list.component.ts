@@ -18,6 +18,7 @@ declare function footableIni(tableName: string): any;
 export class FailureTypesListComponent implements OnInit, AfterViewInit {
 
   failureTypes: FailureType[];
+  failureTypesFiltered: FailureType[];
   currentDate: string;
   isLoadingData = false;
   entityType = EntityType;
@@ -43,15 +44,33 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
     this.failureTypeService.getAll().subscribe(
       objs => { this.failureTypes = objs; },
       error => console.error(error),
-      () => this.stopLoading() );
+      () => { this.filterData(); } );
   }
 
-  getSearchText(searchText: string) {
-    this.searchText = searchText;
+  filterData() {
+    if (this.searchText) {
+      const searchTextUpper = this.searchText.toUpperCase();
+      this.failureTypesFiltered = this.failureTypes.filter(obj =>
+        obj.id.toString().includes(searchTextUpper)
+        || obj.name.toUpperCase().includes(searchTextUpper)
+        || obj.description.toUpperCase().includes(searchTextUpper));
+    } else {
+      this.failureTypesFiltered = this.failureTypes;
+    }
+    if (this.isLoadingData) {
+      this.stopLoading();
+    }
   }
 
-  refreshData() {
+  searchData(searchText: string) {
     this.isLoadingData = true;
+    this.searchText = searchText;
+    this.filterData();
+  }
+
+  refreshData(searchText: string) {
+    this.isLoadingData = true;
+    this.searchText = searchText;
     this.loadData();
   }
 

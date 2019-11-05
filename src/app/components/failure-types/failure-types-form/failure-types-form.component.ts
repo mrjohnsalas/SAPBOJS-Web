@@ -101,7 +101,6 @@ export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
     this.isLoadingData = true;
 
     const failureType: FailureType = Object.assign({}, this.formGroup.value);
-    console.table(failureType);
 
     if (this.editMode) {
       failureType.id = this.id;
@@ -117,7 +116,6 @@ export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
         () => this.stopLoading()
       );
     }
-
   }
 
   onSaveSuccess(obj: FailureType) {
