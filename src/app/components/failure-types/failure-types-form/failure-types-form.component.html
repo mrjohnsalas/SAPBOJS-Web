@@ -28,6 +28,11 @@
 
                 <div class="ibox-content">
 
+                    <div class="alert alert-danger alert-dismissable" *ngIf="serviceException">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        {{ serviceException.message }}
+                    </div>
+
                     <app-spinner-overlay-wrapper [selectedSpinner]="spinnerType.DoubleBounce" [showSpinner]="isLoadingData">
 
                         <form (submit)="submit()" [formGroup]="formGroup">

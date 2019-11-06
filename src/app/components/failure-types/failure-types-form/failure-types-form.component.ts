@@ -7,6 +7,9 @@ import { SpinnerType } from '../../../_models/spinner-type.enum';
 import { CanDeactivateRoute } from 'src/app/_helpers/lose-changes.guard';
 import swal from 'sweetalert';
 import { Observable } from 'rxjs';
+import { ServiceException } from '../../../_models/service-exception';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Utils } from '../../../_helpers/utils.helper';
 
 @Component({
   selector: 'app-failure-types-form',
@@ -21,6 +24,8 @@ export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
   spinnerType = SpinnerType;
   id: number;
   saved = false;
+  serviceException: ServiceException;
+  utils = new Utils();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -102,6 +107,8 @@ export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
 
     const failureType: FailureType = Object.assign({}, this.formGroup.value);
 
+    this.serviceException = null;
+
     if (this.editMode) {
       failureType.id = this.id;
       this.failureTypeService.update(failureType).subscribe(
@@ -123,10 +130,10 @@ export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
     this.router.navigate(['/failuretypes']);
   }
 
-  onError(error: any) {
+  onError(errorResponse: HttpErrorResponse) {
     this.stopLoading();
     this.saved = false;
-    console.error(error);
+    this.serviceException = this.utils.getServiceExceptionObject(errorResponse);
   }
 
   stopLoading() {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { FailureType } from '../_models/failure-type';
@@ -33,6 +33,7 @@ export class FailureTypeService {
   }
 
   delete(id: number): Observable<FailureType> {
-    return this.http.delete<FailureType>(`${this.baseUrl}/${id}`);
+    const params = new HttpParams().set('deleteBy', this.authenticationService.currentUserValue.email);
+    return this.http.delete<FailureType>(`${this.baseUrl}/${id}`, { params });
   }
 }
