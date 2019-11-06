@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { ServiceException } from '../../../_models/service-exception';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Utils } from '../../../_helpers/utils.helper';
+import { BgColor } from '../../../_models/bg-color.enum';
 
 @Component({
   selector: 'app-failure-types-form',
@@ -22,6 +23,7 @@ export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
   formGroup: FormGroup;
   isLoadingData = false;
   spinnerType = SpinnerType;
+  bgColor = BgColor;
   id: number;
   saved = false;
   serviceException: ServiceException;

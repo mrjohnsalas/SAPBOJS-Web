@@ -1,5 +1,3 @@
-import { RouterLinkWithHref } from '@angular/router';
-
 export class OptionButtonBar {
     showDetail: boolean;
     showEdit: boolean;

@@ -1,1 +1,131 @@
-<p>failure-types-detail works!</p>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>Tipo de falla</h2>
+        <app-breadcrumb></app-breadcrumb>
+    </div>
+    <div class="col-lg-4">
+        <div class="title-action">
+            <button type="button" class="btn btn-primary btn-sm" title="Volver a la lista"
+                [routerLink]='["/failuretypes/"]' [disabled]="isLoadingData">
+                <i class="fa fa-arrow-left"></i> Volver a la lista</button>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-title">
+                    <h5>{{ deleteMode ? 'Eliminar' : 'Detalle de'}} Tipo de falla</h5>
+
+                    <div class="ibox-tools">
+                        <app-stepper [stepperBar]="stepperBar"></app-stepper>
+                    </div>
+
+                </div>
+
+                <div class="ibox-content" *ngIf="failureType">
+
+                    <app-alert [text]="serviceException.message" [bgColor]="bgColor.Danger" *ngIf="serviceException">
+                    </app-alert>
+
+                    <app-spinner-overlay-wrapper [selectedSpinner]="spinnerType.DoubleBounce"
+                        [showSpinner]="isLoadingData">
+
+                        <div class="row" *ngIf="deleteMode">
+                            <div class="col-lg-12">
+                                <div class="m-b-md">
+                                    <h4 class="text-danger">¿Estás seguro que quieres eliminar esto?</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <dl class="row mb-0">
+                                    <div class="col-sm-4 text-sm-right">
+                                        <dt>Id:</dt>
+                                    </div>
+                                    <div class="col-sm-8 text-sm-left">
+                                        <dd class="mb-1">{{ failureType.id }}</dd>
+                                    </div>
+                                </dl>
+                                <dl class="row mb-0">
+                                    <div class="col-sm-4 text-sm-right">
+                                        <dt>Tipo de falla:</dt>
+                                    </div>
+                                    <div class="col-sm-8 text-sm-left">
+                                        <dd class="mb-1">{{ failureType.name }}</dd>
+                                    </div>
+                                </dl>
+                            </div>
+                            <div class="col-lg-6">
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <dl class="row mb-0">
+                                    <div class="col-sm-4 text-sm-right">
+                                        <dt>Descripción:</dt>
+                                    </div>
+                                    <div class="col-sm-8 text-sm-left">
+                                        <dd class="mb-1">{{ failureType.description }}</dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-lg-6">
+                                <dl class="row mb-0">
+                                    <div class="col-sm-4 text-sm-right">
+                                        <dt>Estado:</dt>
+                                    </div>
+                                    <div class="col-sm-8 text-sm-left">
+                                        <dd class="mb-1">
+                                            <app-status-label [selectedEntity]="entityType.FailureType"
+                                                [selectedStatus]="failureType.statusId"></app-status-label>
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+                            <div class="col-lg-6">
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4" *ngIf="!deleteMode">
+                                <button type="button" class="btn btn-white btn-sm" title="Volver a la lista"
+                                    [routerLink]='["/failuretypes/"]' [disabled]="isLoadingData">
+                                    <i class="fa fa-arrow-left"></i> Volver a la lista
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-sm ml-1" title="Editar"
+                                    [routerLink]="pathEdit" [disabled]="isLoadingData">
+                                    <i class="fa fa-pencil"></i> Editar
+                                </button>
+                            </div>
+                            <div class="col-sm-4" *ngIf="deleteMode">
+                                <button type="button" class="btn btn-white btn-sm" title="Cancelar"
+                                    [routerLink]='["/failuretypes/"]' [disabled]="isLoadingData">
+                                    <i class="fa fa-times"></i> Cancelar
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm ml-1" title="Anular"
+                                    (click)="delete()" [disabled]="isLoadingData">
+                                    <i class="fa fa-trash"></i> Anular
+                                </button>
+                            </div>
+                        </div>
+
+                    </app-spinner-overlay-wrapper>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="btn-group" *ngIf="stepperBar">
+    <a [routerLink]="stepperBar.pathFirst" class="btn btn-default btn-sm" title="Primero">
+        <i class="fa fa-angle-double-left"></i>
+    </a>
+    <a [routerLink]="stepperBar.pathPrevious" class="btn btn-default btn-sm" title="Anterior">
+        <i class="fa fa-angle-left"></i>
+    </a>
+    <a [routerLink]="stepperBar.pathNext" class="btn btn-default btn-sm" title="Siguiente">
+        <i class="fa fa-angle-right"></i>
+    </a>
+    <a [routerLink]="stepperBar.pathLast" class="btn btn-default btn-sm" title="Ultimo">
+        <i class="fa fa-angle-double-right"></i>
+    </a>
+</div>

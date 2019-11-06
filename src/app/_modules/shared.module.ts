@@ -10,6 +10,8 @@ import { StatusLabelComponent } from '../components/shared/status-label/status-l
 import { BasicSearchFormComponent } from '../components/shared/basic-search-form/basic-search-form.component';
 import { OptionButtonBarComponent } from '../components/shared/option-button-bar/option-button-bar.component';
 import { BreadcrumbComponent } from '../components/shared/breadcrumb/breadcrumb.component';
+import { AlertComponent } from '../components/shared/alert/alert.component';
+import { StepperComponent } from '../components/shared/stepper/stepper.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { BreadcrumbComponent } from '../components/shared/breadcrumb/breadcrumb.
     SpinnerOverlayWrapperComponent,
     StatusLabelComponent,
     BasicSearchFormComponent,
-    OptionButtonBarComponent
+    OptionButtonBarComponent,
+    AlertComponent,
+    StepperComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +40,9 @@ import { BreadcrumbComponent } from '../components/shared/breadcrumb/breadcrumb.
     SpinnerOverlayWrapperComponent,
     StatusLabelComponent,
     BasicSearchFormComponent,
-    OptionButtonBarComponent
+    OptionButtonBarComponent,
+    AlertComponent,
+    StepperComponent
   ]
 })
 export class SharedModule { }

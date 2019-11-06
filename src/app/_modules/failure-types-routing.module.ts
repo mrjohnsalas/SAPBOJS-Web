@@ -12,6 +12,7 @@ const routes: Routes = [
     children: [
       { path: '', component: FailureTypesListComponent, data: { breadcrumb: null } },
       { path: 'detail/:id', component: FailureTypesDetailComponent, data: { breadcrumb: 'Detalle' } },
+      { path: 'delete/:id', component: FailureTypesDetailComponent, data: { breadcrumb: 'Eliminar' } },
       { path: 'create', component: FailureTypesFormComponent, data: { breadcrumb: 'Nuevo' }, canDeactivate: [LoseChangesGuard] },
       { path: 'edit/:id', component: FailureTypesFormComponent, data: { breadcrumb: 'Editar' }, canDeactivate: [LoseChangesGuard] } ] }
 ];

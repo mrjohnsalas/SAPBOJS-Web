@@ -33,7 +33,7 @@ export class BreadcrumbComponent implements OnInit {
     if (isDynamicRoute && !!route.snapshot) {
       const paramName = lastRoutePart.split(':')[1];
       path = path.replace(lastRoutePart, route.snapshot.params[paramName]);
-      label = route.snapshot.params[paramName];
+      // label = route.snapshot.params[paramName];
     }
 
     const nextUrl = path ? `${url}/${path}` : url;
