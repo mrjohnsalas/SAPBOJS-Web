@@ -10,6 +10,7 @@ export class FailureTypesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

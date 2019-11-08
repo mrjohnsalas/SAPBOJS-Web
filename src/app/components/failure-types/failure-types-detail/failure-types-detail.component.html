@@ -21,12 +21,12 @@
                     <h5>{{ deleteMode ? 'Eliminar' : 'Detalle de'}} Tipo de falla</h5>
 
                     <div class="ibox-tools">
-                        <app-stepper [stepperBar]="stepperBar"></app-stepper>
+                        <app-stepper [stepperBar]="stepperBar" [isLoadingData]="isLoadingData"></app-stepper>
                     </div>
 
                 </div>
 
-                <div class="ibox-content" *ngIf="failureType">
+                <div class="ibox-content" *ngIf="currentObj">
 
                     <app-alert [text]="serviceException.message" [bgColor]="bgColor.Danger" *ngIf="serviceException">
                     </app-alert>
@@ -49,7 +49,7 @@
                                         <dt>Id:</dt>
                                     </div>
                                     <div class="col-sm-8 text-sm-left">
-                                        <dd class="mb-1">{{ failureType.id }}</dd>
+                                        <dd class="mb-1">{{ currentObj.id }}</dd>
                                     </div>
                                 </dl>
                                 <dl class="row mb-0">
@@ -57,7 +57,7 @@
                                         <dt>Tipo de falla:</dt>
                                     </div>
                                     <div class="col-sm-8 text-sm-left">
-                                        <dd class="mb-1">{{ failureType.name }}</dd>
+                                        <dd class="mb-1">{{ currentObj.name }}</dd>
                                     </div>
                                 </dl>
                             </div>
@@ -73,7 +73,7 @@
                                         <dt>Descripción:</dt>
                                     </div>
                                     <div class="col-sm-8 text-sm-left">
-                                        <dd class="mb-1">{{ failureType.description }}</dd>
+                                        <dd class="mb-1">{{ currentObj.description }}</dd>
                                     </div>
                                 </dl>
                             </div>
@@ -88,7 +88,7 @@
                                     <div class="col-sm-8 text-sm-left">
                                         <dd class="mb-1">
                                             <app-status-label [selectedEntity]="entityType.FailureType"
-                                                [selectedStatus]="failureType.statusId"></app-status-label>
+                                                [selectedStatus]="currentObj.statusId"></app-status-label>
                                         </dd>
                                     </div>
                                 </dl>
@@ -104,9 +104,13 @@
                                     [routerLink]='["/failuretypes/"]' [disabled]="isLoadingData">
                                     <i class="fa fa-arrow-left"></i> Volver a la lista
                                 </button>
-                                <button type="submit" class="btn btn-primary btn-sm ml-1" title="Editar"
-                                    [routerLink]="pathEdit" [disabled]="isLoadingData">
+                                <button type="button" class="btn btn-primary btn-sm ml-1" title="Editar"
+                                    [routerLink]="editPath" [disabled]="isLoadingData">
                                     <i class="fa fa-pencil"></i> Editar
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm ml-1" title="Anular"
+                                    [routerLink]="deletePath" [disabled]="isLoadingData">
+                                    <i class="fa fa-trash"></i> Anular
                                 </button>
                             </div>
                             <div class="col-sm-4" *ngIf="deleteMode">

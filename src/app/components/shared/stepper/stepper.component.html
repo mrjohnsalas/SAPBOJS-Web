@@ -1,14 +1,14 @@
 <div class="btn-group" *ngIf="stepperBar">
-    <a [routerLink]="stepperBar.pathFirst" class="btn btn-default btn-sm" title="Primero">
+    <button type="button" [routerLink]="pathFirst" class="btn btn-white btn-sm" title="Primero" (click)="first()" [disabled]="isLoadingData">
         <i class="fa fa-angle-double-left"></i>
-    </a>
-    <a [routerLink]="stepperBar.pathPrevious" class="btn btn-default btn-sm" title="Anterior">
+    </button>
+    <button type="button" [routerLink]="pathPrevious" class="btn btn-white btn-sm" title="Anterior" (click)="previous()" [disabled]="isLoadingData">
         <i class="fa fa-angle-left"></i>
-    </a>
-    <a [routerLink]="stepperBar.pathNext" class="btn btn-default btn-sm" title="Siguiente">
+    </button>
+    <button type="button" [routerLink]="pathNext" class="btn btn-white btn-sm" title="Siguiente" (click)="next()" [disabled]="isLoadingData">
         <i class="fa fa-angle-right"></i>
-    </a>
-    <a [routerLink]="stepperBar.pathLast" class="btn btn-default btn-sm" title="Ultimo">
+    </button>
+    <button type="button" [routerLink]="pathLast" class="btn btn-white btn-sm" title="Ultimo" (click)="last()" [disabled]="isLoadingData">
         <i class="fa fa-angle-double-right"></i>
-    </a>
+    </button>
 </div>
