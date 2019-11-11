@@ -10,7 +10,8 @@ import { EntityType } from 'src/app/_models/entity-type.enum';
 import { SpinnerType } from 'src/app/_models/spinner-type.enum';
 import { StepperBar } from '../../../_models/stepper-bar';
 import { CommunicationService } from 'src/app/_services/communication.service';
-
+import swal from 'sweetalert';
+import { AppSettingsService } from '../../../_services/app-settings.service';
 
 @Component({
   selector: 'app-failure-types-detail',
@@ -27,9 +28,9 @@ export class FailureTypesDetailComponent implements OnInit {
   serviceException: ServiceException;
   utils = new Utils();
   bgColor = BgColor;
-
+  objName = 'Tipo de falla';
   parentPath = 'failuretypes';
-  basePath = `/${this.parentPath}/detail/`;
+  indexPath = `/${this.parentPath}`;
   editPath: string;
   deletePath: string;
 
@@ -41,40 +42,42 @@ export class FailureTypesDetailComponent implements OnInit {
     private failureTypeService: FailureTypeService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private communicationService: CommunicationService) { }
+    private communicationService: CommunicationService,
+    public appSettingsService: AppSettingsService) { }
 
   ngOnInit() {
     this.ids = this.communicationService.ids;
     this.activatedRoute.params.subscribe(params => {
       if (params.id === undefined) {
-        this.router.navigate(['/failuretypes']);
+        this.goToIndex();
       }
       this.isLoadingData = true;
       this.id = parseInt(params.id);
+      this.deleteMode = this.activatedRoute.routeConfig.path.split('/')[0] === this.appSettingsService.DeleteLink;
       this.setStepperBar();
       this.setActionButtons();
-      this.deleteMode = this.activatedRoute.routeConfig.path.split('/')[0] === 'delete';
       this.failureTypeService.get(this.id).subscribe(
-        obj => this.onSuccess(obj),
+        obj => this.onLoadForm(obj),
         error => this.onError(error),
         () => this.stopLoading());
     });
   }
 
   setActionButtons() {
-    this.editPath = `/${this.parentPath}/edit/${this.id}`;
-    this.deletePath = `/${this.parentPath}/delete/${this.id}`;
+    this.editPath = `/${this.parentPath}/${this.appSettingsService.EditLink}/${this.id}`;
+    this.deletePath = `/${this.parentPath}/${this.appSettingsService.DeleteLink}/${this.id}`;
   }
 
   setStepperBar() {
     if (this.ids && this.id) {
-      this.stepperBar = new StepperBar(this.ids, this.id, this.basePath);
+      this.stepperBar = new StepperBar(this.ids, this.id, `/${this.parentPath}/${ this.deleteMode
+        ? this.appSettingsService.DeleteLink : this.appSettingsService.DetailLink }/`);
     } else {
       this.stepperBar = null;
     }
   }
 
-  onSuccess(obj: FailureType) {
+  onLoadForm(obj: FailureType) {
     this.currentObj = obj;
   }
 
@@ -88,7 +91,45 @@ export class FailureTypesDetailComponent implements OnInit {
   }
 
   delete() {
+    swal({
+      title: this.appSettingsService.QuestionTitle,
+      text: this.appSettingsService.DeleteQuestion,
+      icon: 'danger',
+      buttons: {
+        cancel: {
+          text: this.appSettingsService.CancelAction,
+          value: false,
+          className: '',
+          visible: true,
+          closeModal: true,
+        },
+        confirm: {
+          text: this.appSettingsService.DeleteAction,
+          value: true,
+          className: '',
+          visible: true,
+          closeModal: true
+        }
+      },
+    }).then((response) => {
+      if (response) {
+        this.isLoadingData = true;
+        this.failureTypeService.delete(this.id).subscribe(
+          obj => this.onDeleteSuccess(obj),
+          error => this.onError(error),
+          () => this.stopLoading()
+        );
+      }
+    });
+  }
 
+  goToIndex() {
+    this.router.navigate([`/${this.parentPath}`]);
+  }
+
+  onDeleteSuccess(obj: FailureType) {
+    this.stopLoading();
+    this.goToIndex();
   }
 
 }

@@ -9,32 +9,39 @@ export class AppSettingsService {
     readonly PercentageDecimals = 4;
     readonly UnitPriceDecimals = 6;
 
-    readonly ActionEdit = 'Editar';
-    readonly ActionDetail = 'Detalle';
-    readonly ActionDelete = 'Anular';
-    readonly ActionInit = 'Iniciar';
-    readonly ActionEnd = 'Terminar';
-    readonly ActionPause = 'Pausar';
-    readonly ActionPrint = 'Imprimir';
-    readonly ActionNew = 'Crear nuevo';
-    readonly ActionCreate = 'Crear';
-    readonly ActionSave = 'Guardar';
-    readonly ActionSearch = 'Buscar';
-    readonly ActionBackToIndex = 'Volver a la lista';
-    readonly ActionCancel = 'Cancelar';
-    readonly ActionAdd = 'Agregar';
-    readonly ActionSelect = 'Seleccionar';
-    readonly ActionCotizar = 'Cotizar';
-    readonly ActionRefresh = 'Refrescar';
-    readonly ActionAccept = 'Aceptar';
-    readonly ActionDeny = 'Rechazar';
-    readonly ActionBackToPending = 'Volver a pendiente';
+    readonly EditAction = 'Editar';
+    readonly DetailAction = 'Detalle';
+    readonly DeleteAction = 'Anular';
+    readonly InitAction = 'Iniciar';
+    readonly EndAction = 'Terminar';
+    readonly PauseAction = 'Pausar';
+    readonly PrintAction = 'Imprimir';
+    readonly NewAction = 'Crear nuevo';
+    readonly CreateAction = 'Crear';
+    readonly SaveAction = 'Guardar';
+    readonly SearchAction = 'Buscar';
+    readonly BackToIndexAction = 'Volver a la lista';
+    readonly CancelAction = 'Cancelar';
+    readonly AddAction = 'Agregar';
+    readonly SelectAction = 'Seleccionar';
+    readonly CotizarAction = 'Cotizar';
+    readonly RefreshAction = 'Refrescar';
+    readonly AcceptAction = 'Aceptar';
+    readonly DenyAction = 'Rechazar';
+    readonly BackToPendingAction = 'Volver a pendiente';
 
-    readonly ActionFirst = 'Primero';
-    readonly ActionPrevious = 'Anterior';
-    readonly ActionNext = 'Siguiente';
-    readonly ActionLast = 'Ultimo';
+    readonly FirstAction = 'Primero';
+    readonly PreviousAction = 'Anterior';
+    readonly NextAction = 'Siguiente';
+    readonly LastAction = 'Ultimo';
 
     readonly DateFormat = 'yyyy-MM-dd';
     readonly TimeFormat = 'HH:mm';
+
+    readonly DetailLink = 'detail';
+    readonly EditLink = 'edit';
+    readonly DeleteLink = 'delete';
+
+    readonly QuestionTitle = '¿Estás seguro?';
+    readonly DeleteQuestion = '¿Estás seguro que quieres anular esto?';
 }
