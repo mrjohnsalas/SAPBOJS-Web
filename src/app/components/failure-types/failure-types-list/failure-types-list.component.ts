@@ -6,10 +6,11 @@ import { EntityType } from '../../../_models/entity-type.enum';
 import { OptionButtonBar } from '../../../_models/option-button-bar';
 import { StatusType } from '../../../_models/status-type.enum';
 import { Utils } from '../../../_helpers/utils.helper';
-import { CommunicationService } from '../../../_services/communication.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ServiceException } from 'src/app/_models/service-exception';
 import { Router } from '@angular/router';
+import { FailureTypeSharedService } from '../../../_services/failure-type-shared.service';
+import { AppSettingsService } from 'src/app/_services/app-settings.service';
 
 declare function setFootable(tableName: string): any;
 declare function footableIni(tableName: string): any;
@@ -21,6 +22,7 @@ declare function footableIni(tableName: string): any;
 })
 export class FailureTypesListComponent implements OnInit, AfterViewInit {
 
+  objName = 'Tipo de falla';
   ids: number[];
   failureTypes: FailureType[];
   failureTypesFiltered: FailureType[];
@@ -34,11 +36,14 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
   utils = new Utils();
   serviceException: ServiceException;
   parentPath = 'failuretypes';
+  newPath = `/${this.parentPath}/${this.appSettingsService.CreateLink}`;
+  homePath = '/home';
 
   constructor(
-    private failureTypeService: FailureTypeService,
+    private objService: FailureTypeService,
     private router: Router,
-    private communicationService: CommunicationService) { }
+    private objSharedService: FailureTypeSharedService,
+    public appSettingsService: AppSettingsService) { }
 
   ngOnInit() {
     this.isLoadingData = true;
@@ -50,7 +55,7 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
   }
 
   loadData() {
-    this.failureTypeService.getAll().subscribe(
+    this.objService.getAll().subscribe(
       obj => this.onSuccess(obj),
       error => this.onError(error),
       () => this.filterData());
@@ -60,7 +65,7 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
     this.failureTypes = obj;
     if (this.failureTypes) {
       this.ids = this.failureTypes.map(e => e.id);
-      this.communicationService.sendIds(this.ids);
+      this.objSharedService.sendIds(this.ids);
     }
   }
 
@@ -68,7 +73,7 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
     this.stopLoading();
     this.serviceException = this.utils.getServiceExceptionObject(errorResponse);
     console.table(this.serviceException);
-    this.router.navigate(['/home']);
+    this.router.navigate([this.homePath]);
   }
 
   filterData() {
@@ -109,12 +114,12 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
 
   getOptionButtonBar(row: FailureType): OptionButtonBar {
     this.optionButtonBar.showDetail = true;
-    this.optionButtonBar.pathDetail = this.utils.getRouterLinkValue(this.parentPath, 'detail', row.id);
+    this.optionButtonBar.pathDetail = this.utils.getRouterLinkValue(this.parentPath, this.appSettingsService.DetailLink, row.id);
     if (row.statusId === StatusType.Activo) {
       this.optionButtonBar.showEdit = true;
-      this.optionButtonBar.pathEdit = this.utils.getRouterLinkValue(this.parentPath, 'edit', row.id);
+      this.optionButtonBar.pathEdit = this.utils.getRouterLinkValue(this.parentPath, this.appSettingsService.EditLink, row.id);
       this.optionButtonBar.showCancel = true;
-      this.optionButtonBar.pathCancel = this.utils.getRouterLinkValue(this.parentPath, 'delete', row.id);
+      this.optionButtonBar.pathCancel = this.utils.getRouterLinkValue(this.parentPath, this.appSettingsService.DeleteLink, row.id);
     }
     return this.optionButtonBar;
   }

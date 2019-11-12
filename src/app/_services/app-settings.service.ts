@@ -8,6 +8,7 @@ export class AppSettingsService {
     readonly QuantityDecimals = 3;
     readonly PercentageDecimals = 4;
     readonly UnitPriceDecimals = 6;
+    readonly DataPageSize = 30;
 
     readonly EditAction = 'Editar';
     readonly DetailAction = 'Detalle';
@@ -22,6 +23,7 @@ export class AppSettingsService {
     readonly SearchAction = 'Buscar';
     readonly BackToIndexAction = 'Volver a la lista';
     readonly CancelAction = 'Cancelar';
+    readonly ExitAction = 'Salir';
     readonly AddAction = 'Agregar';
     readonly SelectAction = 'Seleccionar';
     readonly CotizarAction = 'Cotizar';
@@ -38,10 +40,18 @@ export class AppSettingsService {
     readonly DateFormat = 'yyyy-MM-dd';
     readonly TimeFormat = 'HH:mm';
 
+    readonly CreateLink = 'create';
     readonly DetailLink = 'detail';
     readonly EditLink = 'edit';
     readonly DeleteLink = 'delete';
 
+    readonly LastModification = 'Última modificación';
+
+    readonly Elements = 'Elementos';
+    readonly RequiredErrorMessage = 'Este campo es requerido.';
+    readonly MaxLengthErrorMessage = 'La longitud máxima de caracteres de este campo es:';
+
     readonly QuestionTitle = '¿Estás seguro?';
     readonly DeleteQuestion = '¿Estás seguro que quieres anular esto?';
+    readonly ExitQuestion = '¿Quieres salir del formulario y perder los cambios?';
 }

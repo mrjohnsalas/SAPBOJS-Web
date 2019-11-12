@@ -1,13 +1,13 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
-        <h2>Tipo de falla</h2>
+        <h2>{{ objName }}</h2>
         <app-breadcrumb></app-breadcrumb>
     </div>
     <div class="col-lg-4">
         <div class="title-action">
-            <button type="button" class="btn btn-primary btn-sm" title="Volver a la lista"
-                    [routerLink]='["/failuretypes/"]' [disabled]="isLoadingData">
-                    <i class="fa fa-arrow-left"></i> Volver a la lista</button>
+            <button type="button" class="btn btn-primary btn-sm" title="{{ appSettingsService.BackToIndexAction }}"
+                [routerLink]="indexPath" [disabled]="isLoadingData">
+                <i class="fa fa-arrow-left"></i> {{ appSettingsService.BackToIndexAction }}</button>
         </div>
     </div>
 </div>
@@ -18,7 +18,7 @@
             <div class="ibox float-e-margins">
 
                 <div class="ibox-title">
-                    <h5>{{ editMode ? 'Editar' : 'Crear'}} Tipo de falla</h5>
+                    <h5>{{ editMode ? appSettingsService.EditAction : appSettingsService.CreateAction}} {{ objName }}</h5>
 
                     <div class="ibox-tools">
 
@@ -34,6 +34,7 @@
 
                         <form (submit)="submit()" [formGroup]="formGroup">
 
+                            <!-- Init Obj Detail -->
                             <div class="form-group row"
                                 [ngClass]="{'has-error': name.invalid && (name.dirty || name.touched)}">
                                 <label for="name" class="col-sm-2 col-form-label text-sm-right control-label">Tipo de
@@ -42,9 +43,8 @@
                                     <input class="form-control" type="text" placeholder="Nombre" formControlName="name">
 
                                     <span class="text-danger" *ngIf="(name.dirty || name.touched) && name.errors">
-                                        <span *ngIf="name.errors.required">Este campo es requerido.</span>
-                                        <span *ngIf="name.errors.maxlength">La longitud máxima de este campo es: 30
-                                            caracteres.</span>
+                                        <span *ngIf="name.errors.required">{{ appSettingsService.RequiredErrorMessage }}</span>
+                                        <span *ngIf="name.errors.maxlength">{{ appSettingsService.MaxLengthErrorMessage }} {{ nameMaxLength }}.</span>
                                     </span>
 
                                 </div>
@@ -60,23 +60,22 @@
 
                                     <span class="text-danger"
                                         *ngIf="(description.dirty || description.touched) && description.errors">
-                                        <span *ngIf="description.errors.maxlength">La longitud máxima de este campo es:
-                                            100
-                                            caracteres.</span>
+                                        <span *ngIf="description.errors.maxlength">{{ appSettingsService.MaxLengthErrorMessage }} {{ descriptionMaxLength }}.</span>
                                     </span>
 
                                 </div>
                             </div>
+                            <!-- End Obj Detail -->
 
                             <div class="form-group row">
                                 <div class="col-sm-4 offset-sm-2">
-                                    <button type="button" class="btn btn-white btn-sm"
-                                        [routerLink]='["/failuretypes/"]'>
-                                        <i class="fa fa-times"></i> Cancelar
+                                    <button type="button" class="btn btn-white btn-sm" title="{{ appSettingsService.CancelAction }}"
+                                        [routerLink]="indexPath" [disabled]="isLoadingData">
+                                        <i class="fa fa-times"></i> {{ appSettingsService.CancelAction }}
                                     </button>
-                                    <button type="submit" class="btn btn-primary btn-sm ml-1"
+                                    <button type="submit" class="btn btn-primary btn-sm ml-1" title="{{ editMode ? appSettingsService.EditAction : appSettingsService.CreateAction }}"
                                         [disabled]="formGroup.invalid">
-                                        <i class="fa fa-floppy-o"></i> {{ editMode ? 'Editar' : 'Crear'}}
+                                        <i class="fa fa-floppy-o"></i> {{ editMode ? appSettingsService.EditAction : appSettingsService.CreateAction }}
                                     </button>
                                 </div>
                             </div>

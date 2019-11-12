@@ -12,6 +12,9 @@ import { OptionButtonBarComponent } from '../components/shared/option-button-bar
 import { BreadcrumbComponent } from '../components/shared/breadcrumb/breadcrumb.component';
 import { AlertComponent } from '../components/shared/alert/alert.component';
 import { StepperComponent } from '../components/shared/stepper/stepper.component';
+import { ObjDetailComponent } from '../components/shared/obj-detail/obj-detail.component';
+import { ObjFormComponent } from '../components/shared/obj-form/obj-form.component';
+import { ObjListComponent } from '../components/shared/obj-list/obj-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { StepperComponent } from '../components/shared/stepper/stepper.component
     BasicSearchFormComponent,
     OptionButtonBarComponent,
     AlertComponent,
-    StepperComponent
+    StepperComponent,
+    ObjDetailComponent,
+    ObjFormComponent,
+    ObjListComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +48,10 @@ import { StepperComponent } from '../components/shared/stepper/stepper.component
     BasicSearchFormComponent,
     OptionButtonBarComponent,
     AlertComponent,
-    StepperComponent
+    StepperComponent,
+    ObjDetailComponent,
+    ObjFormComponent,
+    ObjListComponent
   ]
 })
 export class SharedModule { }

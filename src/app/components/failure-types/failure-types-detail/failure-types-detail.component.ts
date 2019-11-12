@@ -9,9 +9,9 @@ import { BgColor } from 'src/app/_models/bg-color.enum';
 import { EntityType } from 'src/app/_models/entity-type.enum';
 import { SpinnerType } from 'src/app/_models/spinner-type.enum';
 import { StepperBar } from '../../../_models/stepper-bar';
-import { CommunicationService } from 'src/app/_services/communication.service';
 import swal from 'sweetalert';
 import { AppSettingsService } from '../../../_services/app-settings.service';
+import { FailureTypeSharedService } from '../../../_services/failure-type-shared.service';
 
 @Component({
   selector: 'app-failure-types-detail',
@@ -42,11 +42,11 @@ export class FailureTypesDetailComponent implements OnInit {
     private failureTypeService: FailureTypeService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private communicationService: CommunicationService,
+    private failureTypeSharedService: FailureTypeSharedService,
     public appSettingsService: AppSettingsService) { }
 
   ngOnInit() {
-    this.ids = this.communicationService.ids;
+    this.ids = this.failureTypeSharedService.ids;
     this.activatedRoute.params.subscribe(params => {
       if (params.id === undefined) {
         this.goToIndex();

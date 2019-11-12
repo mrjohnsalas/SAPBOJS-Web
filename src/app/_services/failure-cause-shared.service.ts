@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CommunicationService {
+export class FailureCauseSharedService {
 
     ids: number[];
     private sendIdsSubject = new Subject<number[]>();

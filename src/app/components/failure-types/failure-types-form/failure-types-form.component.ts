@@ -11,6 +11,7 @@ import { ServiceException } from '../../../_models/service-exception';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Utils } from '../../../_helpers/utils.helper';
 import { BgColor } from '../../../_models/bg-color.enum';
+import { AppSettingsService } from 'src/app/_services/app-settings.service';
 
 @Component({
   selector: 'app-failure-types-form',
@@ -19,6 +20,7 @@ import { BgColor } from '../../../_models/bg-color.enum';
 })
 export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
 
+  objName = 'Tipo de falla';
   editMode = false;
   formGroup: FormGroup;
   isLoadingData = false;
@@ -28,12 +30,17 @@ export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
   saved = false;
   serviceException: ServiceException;
   utils = new Utils();
+  parentPath = 'failuretypes';
+  indexPath = `/${this.parentPath}`;
+  nameMaxLength: 30;
+  descriptionMaxLength: 100;
 
   constructor(
     private formBuilder: FormBuilder,
-    private failureTypeService: FailureTypeService,
+    private objService: FailureTypeService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    public appSettingsService: AppSettingsService) { }
 
   get name() {
     return this.formGroup.get('name');
@@ -47,19 +54,19 @@ export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
     if (this.saved) { return true; }
 
     return swal({
-      title: '¿Estás seguro?',
-      text: '¿Quieres salir del formulario y perder los cambios?',
-      icon: 'warning',
+      title: this.appSettingsService.QuestionTitle,
+      text: this.appSettingsService.ExitQuestion,
+      icon: this.bgColor.Warning,
       buttons: {
         cancel: {
-          text: 'Cancelar',
+          text: this.appSettingsService.CancelAction,
           value: false,
           className: '',
           visible: true,
           closeModal: true,
         },
         confirm: {
-          text: 'Salir',
+          text: this.appSettingsService.ExitAction,
           value: true,
           className: '',
           visible: true,
@@ -72,8 +79,8 @@ export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
   ngOnInit() {
 
     this.formGroup = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(30)]],
-      description: ['', [Validators.maxLength(100)]]
+      name: ['', [Validators.required, Validators.maxLength(this.nameMaxLength)]],
+      description: ['', [Validators.maxLength(this.descriptionMaxLength)]]
     });
 
     this.activatedRoute.params.subscribe(params => {
@@ -81,7 +88,7 @@ export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
       this.isLoadingData = true;
       this.editMode = true;
       this.id = params.id;
-      this.failureTypeService.get(this.id).subscribe(
+      this.objService.get(this.id).subscribe(
         obj => this.onLoadForm(obj),
         error => this.onError(error),
         () => this.stopLoading()
@@ -113,13 +120,13 @@ export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
 
     if (this.editMode) {
       failureType.id = this.id;
-      this.failureTypeService.update(failureType).subscribe(
+      this.objService.update(failureType).subscribe(
         obj => this.onSaveSuccess(obj),
         error => this.onError(error),
         () => this.stopLoading()
       );
     } else {
-      this.failureTypeService.create(failureType).subscribe(
+      this.objService.create(failureType).subscribe(
         obj => this.onSaveSuccess(obj),
         error => this.onError(error),
         () => this.stopLoading()
@@ -129,7 +136,7 @@ export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
 
   onSaveSuccess(obj: FailureType) {
     this.stopLoading();
-    this.router.navigate(['/failuretypes']);
+    this.goToIndex();
   }
 
   onError(errorResponse: HttpErrorResponse) {
@@ -140,6 +147,10 @@ export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
 
   stopLoading() {
     this.isLoadingData = false;
+  }
+
+  goToIndex() {
+    this.router.navigate([`/${this.parentPath}`]);
   }
 
 }

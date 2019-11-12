@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Tipo de falla</h2>
+        <h2>{{ objName }}</h2>
         <app-breadcrumb></app-breadcrumb>
     </div>
     <div class="col-lg-2">
@@ -14,30 +14,32 @@
             <div class="ibox float-e-margins">
 
                 <div class="ibox-title">
-                    <h5>Lista de Tipo de falla</h5>
+                    <h5>Lista de {{ objName }}</h5>
 
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary btn-sm" title="Nuevo"
-                        [routerLink]='["/failuretypes/create"]' [disabled]="isLoadingData">
-                        <i class="fa fa-plus"></i> Crear nuevo</button>
+                        <button type="button" class="btn btn-primary btn-sm" title="{{ appSettingsService.NewAction }}"
+                        [routerLink]="newPath" [disabled]="isLoadingData">
+                        <i class="fa fa-plus"></i> {{ appSettingsService.NewAction }}</button>
                     </div>
 
                 </div>
 
                 <div class="ibox-content">
 
-                    <span class="text-muted small float-right">Ultima modificación: <i class="fa fa-clock-o"></i>{{ currentDate }}</span>
+                    <span class="text-muted small float-right">{{ appSettingsService.LastModification }} <i class="fa fa-clock-o"></i>{{ currentDate }}</span>
 
-                    <h2>Lista de Tipo de falla</h2>
+                    <h2>Lista de {{ objName }}</h2>
 
                     <app-basic-search-form (sendEventSearch)="searchData($event)" (sendEventRefresh)="refreshData($event)" [isLoadingData]="isLoadingData"></app-basic-search-form>
 
-                    <span class="pull-right small text-muted">{{ failureTypesFiltered ? failureTypesFiltered.length : 0 }} Elementos</span>
+                    <span class="pull-right small text-muted">{{ failureTypesFiltered ? failureTypesFiltered.length : 0 }} {{ appSettingsService.Elements }}</span>
 
                     <app-spinner-overlay-wrapper [selectedSpinner]="spinnerType.DoubleBounce" [showSpinner]="isLoadingData">
 
                             <table class="footable table toggle-arrow-tiny table-hover" data-page-size="30"
                             data-striping="false" id="ft-index">
+
+                            <!-- Init Obj Detail -->
                             <thead>
                                 <tr>
                                     <th class="text-center" data-hide="phone">Tipo de falla Id</th>
@@ -63,6 +65,7 @@
                                     <div class="d-none" *ngIf="last">{{ footableInit() }}</div>
                                 </tr>
                             </tbody>
+                            <!-- End Obj Detail -->
                             <tfoot>
                                 <tr>
                                     <td colspan="12">
