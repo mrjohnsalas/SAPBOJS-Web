@@ -1,1 +1,49 @@
-<p>obj-form works!</p>
+<app-base-ui>
+    <div titleLeft>
+        <h2>{{ objName }}</h2>
+        <app-breadcrumb></app-breadcrumb>
+    </div>
+    <div titleRight>
+        <div class="title-action">
+            <button type="button" class="btn btn-primary btn-sm" title="{{ appSettingsService.BackToIndexAction }}"
+                [routerLink]="indexPath" [disabled]="isLoadingData">
+                <i class="fa fa-arrow-left"></i> {{ appSettingsService.BackToIndexAction }}</button>
+        </div>
+    </div>
+    <div iboxTitle>
+        <h5>{{ editMode ? appSettingsService.EditAction : appSettingsService.CreateAction}} {{ objName }}</h5>
+    </div>
+    <div iboxTools>
+
+    </div>
+    <div iboxContent>
+        <app-alert [text]="serviceException.message" [bgColor]="bgColor.Danger" *ngIf="serviceException"></app-alert>
+
+        <app-spinner-overlay-wrapper [selectedSpinner]="spinnerType.DoubleBounce" [showSpinner]="isLoadingData">
+
+            <form (submit)="submit()" [formGroup]="formGroup">
+
+                <!-- Init Obj Detail -->
+                <ng-content></ng-content>
+                <!-- End Obj Detail -->
+
+                <div class="form-group row">
+                    <div class="col-sm-4 offset-sm-2">
+                        <button type="button" class="btn btn-white btn-sm" title="{{ appSettingsService.CancelAction }}"
+                            [routerLink]="indexPath" [disabled]="isLoadingData">
+                            <i class="fa fa-times"></i> {{ appSettingsService.CancelAction }}
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-sm ml-1"
+                            title="{{ editMode ? appSettingsService.EditAction : appSettingsService.CreateAction }}"
+                            [disabled]="formGroup.invalid">
+                            <i class="fa fa-floppy-o"></i>
+                            {{ editMode ? appSettingsService.EditAction : appSettingsService.CreateAction }}
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+        </app-spinner-overlay-wrapper>
+    </div>
+</app-base-ui>

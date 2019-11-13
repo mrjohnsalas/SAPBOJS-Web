@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { FailureCauseService } from 'src/app/_services/failure-cause.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FailureCause } from '../../../_models/failure-cause';
-import { SpinnerType } from 'src/app/_models/spinner-type.enum';
-import { EntityType } from 'src/app/_models/entity-type.enum';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ServiceException } from 'src/app/_models/service-exception';
 import { Utils } from 'src/app/_helpers/utils.helper';
 import { BgColor } from 'src/app/_models/bg-color.enum';
+import { EntityType } from 'src/app/_models/entity-type.enum';
+import { SpinnerType } from 'src/app/_models/spinner-type.enum';
 import { StepperBar } from 'src/app/_models/stepper-bar';
-import { FailureCauseService } from 'src/app/_services/failure-cause.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FailureCauseSharedService } from 'src/app/_services/failure-cause-shared.service';
 import { AppSettingsService } from 'src/app/_services/app-settings.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { FailureCauseSharedService } from 'src/app/_services/failure-cause-shared.service';
 import swal from 'sweetalert';
 
 @Component({

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { LoadDataComponent } from '../components/shared/load-data/load-data.component';
@@ -15,6 +15,7 @@ import { StepperComponent } from '../components/shared/stepper/stepper.component
 import { ObjDetailComponent } from '../components/shared/obj-detail/obj-detail.component';
 import { ObjFormComponent } from '../components/shared/obj-form/obj-form.component';
 import { ObjListComponent } from '../components/shared/obj-list/obj-list.component';
+import { BaseUiComponent } from '../components/shared/base-ui/base-ui.component';
 
 @NgModule({
   declarations: [
@@ -29,11 +30,13 @@ import { ObjListComponent } from '../components/shared/obj-list/obj-list.compone
     StepperComponent,
     ObjDetailComponent,
     ObjFormComponent,
-    ObjListComponent
+    ObjListComponent,
+    BaseUiComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule
   ],
   exports: [
@@ -51,7 +54,8 @@ import { ObjListComponent } from '../components/shared/obj-list/obj-list.compone
     StepperComponent,
     ObjDetailComponent,
     ObjFormComponent,
-    ObjListComponent
+    ObjListComponent,
+    BaseUiComponent
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,31 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <ng-content select="[titleLeft]"></ng-content>
+    </div>
+    <div class="col-lg-4">
+        <ng-content select="[titleRight]"></ng-content>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-title">
+                    <ng-content select="[iboxTitle]"></ng-content>
+                    
+                    <div class="ibox-tools">
+                        <ng-content select="[iboxTools]"></ng-content>
+                    </div>
+
+                </div>
+
+                <div class="ibox-content">
+                    <ng-content select="[iboxContent]"></ng-content>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

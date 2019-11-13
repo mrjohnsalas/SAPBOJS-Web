@@ -1,58 +1,49 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
+<app-base-ui>
+    <div titleLeft>
         <h2>{{ objName }}</h2>
         <app-breadcrumb></app-breadcrumb>
     </div>
-    <div class="col-lg-2">
+    <div titleRight>
 
     </div>
-</div>
-
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-
-                <div class="ibox-title">
-                    <h5>Lista de {{ objName }}</h5>
-
-                    <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary btn-sm" title="{{ appSettingsService.NewAction }}"
-                        [routerLink]="newPath" [disabled]="isLoadingData">
-                        <i class="fa fa-plus"></i> {{ appSettingsService.NewAction }}</button>
-                    </div>
-
-                </div>
-
-                <div class="ibox-content">
-
-                    <span class="text-muted small float-right">{{ appSettingsService.LastModification }} <i class="fa fa-clock-o"></i>{{ currentDate }}</span>
-
-                    <h2>Lista de {{ objName }}</h2>
-
-                    <ng-content select="[searchForm]"></ng-content>
-
-                    <span class="pull-right small text-muted">{{ objsFiltered ? objsFiltered.length : 0 }} {{ appSettingsService.Elements }}</span>
-
-                    <app-spinner-overlay-wrapper [selectedSpinner]="spinnerType.DoubleBounce" [showSpinner]="isLoadingData">
-
-                            <table class="footable table toggle-arrow-tiny table-hover" data-page-size="30"
-                            data-striping="false" id="ft-index">
-
-                            <tfoot>
-                                <tr>
-                                    <td colspan="12">
-                                        <ul class="pagination pull-right"></ul>
-                                    </td>
-                                </tr>
-                            </tfoot>
-    
-                        </table>
-
-                    </app-spinner-overlay-wrapper>
-
-                </div>
-            </div>
-        </div>
+    <div iboxTitle>
+        <h5>Lista de {{ objName }}</h5>
     </div>
-</div>
+    <div iboxTools>
+        <button type="button" class="btn btn-primary btn-sm" title="{{ appSettingsService.NewAction }}"
+            [routerLink]="newPath" [disabled]="isLoadingData">
+            <i class="fa fa-plus"></i> {{ appSettingsService.NewAction }}</button>
+    </div>
+    <div iboxContent>
+        <span class="text-muted small float-right">{{ appSettingsService.LastModification }} <i
+                class="fa fa-clock-o"></i>{{ currentDate }}</span>
+
+        <h2>Lista de {{ objName }}</h2>
+
+        <ng-content select="[searchForm]"></ng-content>
+
+        <span class="pull-right small text-muted">{{ objsFiltered ? objsFiltered.length : 0 }}
+            {{ appSettingsService.Elements }}</span>
+
+        <app-spinner-overlay-wrapper [selectedSpinner]="spinnerType.DoubleBounce" [showSpinner]="isLoadingData">
+
+            <table class="footable table toggle-arrow-tiny table-hover" data-page-size="30" data-striping="false"
+                id="ft-index">
+
+                <!-- Init Obj Detail -->
+                <ng-content></ng-content>
+                <!-- End Obj Detail -->
+
+                <tfoot>
+                    <tr>
+                        <td colspan="12">
+                            <ul class="pagination pull-right"></ul>
+                        </td>
+                    </tr>
+                </tfoot>
+
+            </table>
+
+        </app-spinner-overlay-wrapper>
+    </div>
+</app-base-ui>

@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FailureTypeService } from 'src/app/_services/failure-type.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FailureType } from '../../../_models/failure-type';
-import { SpinnerType } from '../../../_models/spinner-type.enum';
-import { CanDeactivateRoute } from 'src/app/_helpers/lose-changes.guard';
-import swal from 'sweetalert';
-import { Observable } from 'rxjs';
-import { ServiceException } from '../../../_models/service-exception';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { CanDeactivateRoute } from 'src/app/_helpers/lose-changes.guard';
+import { SpinnerType } from '../../../_models/spinner-type.enum';
+import { ServiceException } from '../../../_models/service-exception';
 import { Utils } from '../../../_helpers/utils.helper';
 import { BgColor } from '../../../_models/bg-color.enum';
 import { AppSettingsService } from 'src/app/_services/app-settings.service';
+import swal from 'sweetalert';
+
+import { FailureTypeService } from 'src/app/_services/failure-type.service';
+import { FailureType } from '../../../_models/failure-type';
 
 @Component({
   selector: 'app-failure-types-form',
@@ -114,19 +115,19 @@ export class FailureTypesFormComponent implements OnInit, CanDeactivateRoute {
 
     this.isLoadingData = true;
 
-    const failureType: FailureType = Object.assign({}, this.formGroup.value);
+    const formObj: FailureType = Object.assign({}, this.formGroup.value);
 
     this.serviceException = null;
 
     if (this.editMode) {
-      failureType.id = this.id;
-      this.objService.update(failureType).subscribe(
+      formObj.id = this.id;
+      this.objService.update(formObj).subscribe(
         obj => this.onSaveSuccess(obj),
         error => this.onError(error),
         () => this.stopLoading()
       );
     } else {
-      this.objService.create(failureType).subscribe(
+      this.objService.create(formObj).subscribe(
         obj => this.onSaveSuccess(obj),
         error => this.onError(error),
         () => this.stopLoading()

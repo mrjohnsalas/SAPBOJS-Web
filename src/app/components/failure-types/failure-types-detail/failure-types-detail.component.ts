@@ -39,14 +39,14 @@ export class FailureTypesDetailComponent implements OnInit {
   stepperBar: StepperBar;
 
   constructor(
-    private failureTypeService: FailureTypeService,
+    private objService: FailureTypeService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private failureTypeSharedService: FailureTypeSharedService,
+    private objSharedService: FailureTypeSharedService,
     public appSettingsService: AppSettingsService) { }
 
   ngOnInit() {
-    this.ids = this.failureTypeSharedService.ids;
+    this.ids = this.objSharedService.ids;
     this.activatedRoute.params.subscribe(params => {
       if (params.id === undefined) {
         this.goToIndex();
@@ -56,7 +56,7 @@ export class FailureTypesDetailComponent implements OnInit {
       this.deleteMode = this.activatedRoute.routeConfig.path.split('/')[0] === this.appSettingsService.DeleteLink;
       this.setStepperBar();
       this.setActionButtons();
-      this.failureTypeService.get(this.id).subscribe(
+      this.objService.get(this.id).subscribe(
         obj => this.onLoadForm(obj),
         error => this.onError(error),
         () => this.stopLoading());
@@ -114,7 +114,7 @@ export class FailureTypesDetailComponent implements OnInit {
     }).then((response) => {
       if (response) {
         this.isLoadingData = true;
-        this.failureTypeService.delete(this.id).subscribe(
+        this.objService.delete(this.id).subscribe(
           obj => this.onDeleteSuccess(obj),
           error => this.onError(error),
           () => this.stopLoading()

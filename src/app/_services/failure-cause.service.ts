@@ -10,7 +10,7 @@ import { AuthenticationService } from './authentication.service';
 })
 export class FailureCauseService {
 
-  baseUrl = environment.webApiURL + 'failuretypes';
+  baseUrl = environment.webApiURL + 'failurecauses';
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) { }
 
