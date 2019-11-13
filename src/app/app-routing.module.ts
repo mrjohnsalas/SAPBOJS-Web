@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'failuretypes', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
     loadChildren: () => import('./_modules/failure-types.module').then(module => module.FailureTypesModule)
   },
+  {
+    path: 'failurecauses', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
+    loadChildren: () => import('./_modules/failure-causes.module').then(module => module.FailureCausesModule)
+  },
   { path: '**', redirectTo: '' }
 ];
 

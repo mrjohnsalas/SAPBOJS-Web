@@ -15,9 +15,9 @@ export class StatusLabelComponent implements OnInit {
   utils = new Utils();
 
   @Input()
-  selectedEntity: EntityType.FailureType;
+  selectedEntity: EntityType;
   @Input()
-  selectedStatus: StatusType.Anulado;
+  selectedStatus: StatusType;
 
   constructor() { }
 

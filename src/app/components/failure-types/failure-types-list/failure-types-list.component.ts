@@ -24,8 +24,8 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
 
   objName = 'Tipo de falla';
   ids: number[];
-  failureTypes: FailureType[];
-  failureTypesFiltered: FailureType[];
+  objs: FailureType[];
+  objsFiltered: FailureType[];
   currentDate: string;
   isLoadingData = false;
   entityType = EntityType;
@@ -62,9 +62,9 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
   }
 
   onSuccess(obj: FailureType[]) {
-    this.failureTypes = obj;
-    if (this.failureTypes) {
-      this.ids = this.failureTypes.map(e => e.id);
+    this.objs = obj;
+    if (this.objs) {
+      this.ids = this.objs.map(e => e.id);
       this.objSharedService.sendIds(this.ids);
     }
   }
@@ -79,12 +79,12 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
   filterData() {
     if (this.searchText) {
       const searchTextUpper = this.searchText.toUpperCase();
-      this.failureTypesFiltered = this.failureTypes.filter(obj =>
+      this.objsFiltered = this.objs.filter(obj =>
         obj.id.toString().includes(searchTextUpper)
         || obj.name.toUpperCase().includes(searchTextUpper)
         || obj.description.toUpperCase().includes(searchTextUpper));
     } else {
-      this.failureTypesFiltered = this.failureTypes;
+      this.objsFiltered = this.objs;
     }
     if (this.isLoadingData) {
       this.stopLoading();

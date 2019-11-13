@@ -9,9 +9,9 @@ import { BgColor } from 'src/app/_models/bg-color.enum';
 import { EntityType } from 'src/app/_models/entity-type.enum';
 import { SpinnerType } from 'src/app/_models/spinner-type.enum';
 import { StepperBar } from '../../../_models/stepper-bar';
-import swal from 'sweetalert';
 import { AppSettingsService } from '../../../_services/app-settings.service';
 import { FailureTypeSharedService } from '../../../_services/failure-type-shared.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-failure-types-detail',
