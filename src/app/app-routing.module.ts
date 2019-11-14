@@ -16,6 +16,18 @@ const routes: Routes = [
     path: 'failurecauses', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
     loadChildren: () => import('./_modules/failure-causes.module').then(module => module.FailureCausesModule)
   },
+  {
+    path: 'failureimpacts', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
+    loadChildren: () => import('./_modules/failure-impacts.module').then(module => module.FailureImpactsModule)
+  },
+  {
+    path: 'failuremechanisms', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
+    loadChildren: () => import('./_modules/failure-mechanisms.module').then(module => module.FailureMechanismsModule)
+  },
+  {
+    path: 'failureseverities', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
+    loadChildren: () => import('./_modules/failure-severities.module').then(module => module.FailureSeveritiesModule)
+  },
   { path: '**', redirectTo: '' }
 ];
 

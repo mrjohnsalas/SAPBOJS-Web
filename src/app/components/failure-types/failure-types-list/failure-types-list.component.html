@@ -1,90 +1,33 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-8">
-        <h2>{{ objName }}</h2>
-        <app-breadcrumb></app-breadcrumb>
+<app-obj-list [objName]="objName" [isLoadingData]="isLoadingData" [newPath]="newPath" [currentDate]="currentDate"
+    [objsFiltered]="objsFiltered">
+    <div searchForm>
+        <app-basic-search-form (sendEventSearch)="searchData($event)" (sendEventRefresh)="refreshData($event)"
+            [isLoadingData]="isLoadingData"></app-basic-search-form>
     </div>
-    <div class="col-lg-4">
-
-    
-    
-    
-    
-    </div>
-</div>
-
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-
-                <div class="ibox-title">
-                    <h5>Lista de {{ objName }}</h5>
-
-                    <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary btn-sm" title="{{ appSettingsService.NewAction }}"
-                        [routerLink]="newPath" [disabled]="isLoadingData">
-                        <i class="fa fa-plus"></i> {{ appSettingsService.NewAction }}</button>
-                    </div>
-
-                </div>
-
-                <div class="ibox-content">
-
-                    <span class="text-muted small float-right">{{ appSettingsService.LastModification }} <i class="fa fa-clock-o"></i>{{ currentDate }}</span>
-
-                    <h2>Lista de {{ objName }}</h2>
-
-                    <app-basic-search-form (sendEventSearch)="searchData($event)" (sendEventRefresh)="refreshData($event)" [isLoadingData]="isLoadingData"></app-basic-search-form>
-
-                    <span class="pull-right small text-muted">{{ objsFiltered ? objsFiltered.length : 0 }} {{ appSettingsService.Elements }}</span>
-
-                    <app-spinner-overlay-wrapper [selectedSpinner]="spinnerType.DoubleBounce" [showSpinner]="isLoadingData">
-
-                            <table class="footable table toggle-arrow-tiny table-hover" data-page-size="30"
-                            data-striping="false" id="ft-index">
-
-                            <!-- Init Obj Detail -->
-                            <thead>
-                                <tr>
-                                    <th class="text-center" data-hide="phone">Tipo de falla Id</th>
-                                    <th class="text-center" data-toggle="true">Tipo de falla</th>
-                                    <th class="text-center" data-hide="all">Descripción</th>
-                                    <th class="text-center" data-hide="phone">Estado</th>
-                                    <th class="text-center">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let item of objsFiltered; let last = last">
-                                    <td class="text-center">{{ item.id }}</td>
-                                    <td>{{ item.name }}</td>
-                                    <td>{{ item.description }}</td>
-                                    <td class="text-center">
-                                        <app-status-label 
-                                            [selectedEntity]="entityType.FailureType" [selectedStatus]="item.statusId">
-                                        </app-status-label>
-                                    </td>
-                                    <td class="text-center">
-                                        <app-option-button-bar [optionButtonBar]="getOptionButtonBar(item)"></app-option-button-bar>
-                                    </td>
-                                    <div class="d-none" *ngIf="last">{{ footableInit() }}</div>
-                                </tr>
-                            </tbody>
-                            <!-- End Obj Detail -->
-                            <tfoot>
-                                <tr>
-                                    <td colspan="12">
-                                        <ul class="pagination pull-right"></ul>
-                                    </td>
-                                </tr>
-                            </tfoot>
-    
-                        </table>
-
-                    </app-spinner-overlay-wrapper>
-
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
+    <!-- Init Obj Detail -->
+    <thead>
+        <tr>
+            <th class="text-center" data-hide="phone">{{ objName }} Id</th>
+            <th class="text-center" data-toggle="true">{{ objName }}</th>
+            <th class="text-center" data-hide="all">Descripción</th>
+            <th class="text-center" data-hide="phone">Estado</th>
+            <th class="text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of objsFiltered; let last = last">
+            <td class="text-center">{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td class="text-center">
+                <app-status-label [selectedEntity]="entityType" [selectedStatus]="item.statusId">
+                </app-status-label>
+            </td>
+            <td class="text-center">
+                <app-option-button-bar [optionButtonBar]="getOptionButtonBar(item)"></app-option-button-bar>
+            </td>
+            <div class="d-none" *ngIf="last">{{ footableInit() }}</div>
+        </tr>
+    </tbody>
+    <!-- End Obj Detail -->
+</app-obj-list>

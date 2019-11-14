@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FailureTypeService } from 'src/app/_services/failure-type.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FailureType } from 'src/app/_models/failure-type';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ServiceException } from 'src/app/_models/service-exception';
 import { Utils } from 'src/app/_helpers/utils.helper';
 import { BgColor } from 'src/app/_models/bg-color.enum';
 import { EntityType } from 'src/app/_models/entity-type.enum';
 import { SpinnerType } from 'src/app/_models/spinner-type.enum';
-import { StepperBar } from '../../../_models/stepper-bar';
-import { AppSettingsService } from '../../../_services/app-settings.service';
-import { FailureTypeSharedService } from '../../../_services/failure-type-shared.service';
+import { StepperBar } from 'src/app/_models/stepper-bar';
+import { AppSettingsService } from 'src/app/_services/app-settings.service';
 import swal from 'sweetalert';
+
+import { FailureType } from 'src/app/_models/failure-type';
+import { FailureTypeService } from 'src/app/_services/failure-type.service';
+import { FailureTypeSharedService } from '../../../_services/failure-type-shared.service';
 
 @Component({
   selector: 'app-failure-types-detail',
@@ -20,20 +21,19 @@ import swal from 'sweetalert';
 })
 export class FailureTypesDetailComponent implements OnInit {
 
+  objName = 'Tipo de falla';
   deleteMode = false;
   isLoadingData = false;
   currentObj: FailureType;
   spinnerType = SpinnerType;
-  entityType = EntityType;
+  entityType = EntityType.FailureType;
   serviceException: ServiceException;
   utils = new Utils();
   bgColor = BgColor;
-  objName = 'Tipo de falla';
   parentPath = 'failuretypes';
   indexPath = `/${this.parentPath}`;
   editPath: string;
   deletePath: string;
-
   ids: number[];
   id: number;
   stepperBar: StepperBar;

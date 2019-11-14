@@ -9,41 +9,41 @@ import { ServiceException } from 'src/app/_models/service-exception';
 import { Router } from '@angular/router';
 import { AppSettingsService } from 'src/app/_services/app-settings.service';
 
-import { FailureType } from '../../../_models/failure-type';
-import { FailureTypeService } from '../../../_services/failure-type.service';
-import { FailureTypeSharedService } from '../../../_services/failure-type-shared.service';
+import { FailureImpact } from '../../../_models/failure-impact';
+import { FailureImpactService } from '../../../_services/failure-impact.service';
+import { FailureImpactSharedService } from '../../../_services/failure-impact-shared.service';
 
 declare function setFootable(tableName: string): any;
 declare function footableIni(tableName: string): any;
 
 @Component({
-  selector: 'app-failure-types-list',
-  templateUrl: './failure-types-list.component.html',
-  styleUrls: ['./failure-types-list.component.scss']
+  selector: 'app-failure-impacts-list',
+  templateUrl: './failure-impacts-list.component.html',
+  styleUrls: ['./failure-impacts-list.component.scss']
 })
-export class FailureTypesListComponent implements OnInit, AfterViewInit {
+export class FailureImpactsListComponent implements OnInit, AfterViewInit {
 
-  objName = 'Tipo de falla';
+  objName = 'Impacto de falla';
   ids: number[];
-  objs: FailureType[];
-  objsFiltered: FailureType[];
+  objs: FailureImpact[];
+  objsFiltered: FailureImpact[];
   currentDate: string;
   isLoadingData = false;
-  entityType = EntityType.FailureType;
+  entityType = EntityType.FailureImpact;
   spinnerType = SpinnerType;
   searchText = '';
   tableName = 'ft-index';
   optionButtonBar = new OptionButtonBar();
   utils = new Utils();
   serviceException: ServiceException;
-  parentPath = 'failuretypes';
+  parentPath = 'failureimpacts';
   newPath = `/${this.parentPath}/${this.appSettingsService.CreateLink}`;
   homePath = '/home';
 
   constructor(
-    private objService: FailureTypeService,
+    private objService: FailureImpactService,
     private router: Router,
-    private objSharedService: FailureTypeSharedService,
+    private objSharedService: FailureImpactSharedService,
     public appSettingsService: AppSettingsService) { }
 
   ngOnInit() {
@@ -62,7 +62,7 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
       () => this.filterData());
   }
 
-  onSuccess(obj: FailureType[]) {
+  onSuccess(obj: FailureImpact[]) {
     this.objs = obj;
     if (this.objs) {
       this.ids = this.objs.map(e => e.id);
@@ -113,7 +113,7 @@ export class FailureTypesListComponent implements OnInit, AfterViewInit {
     footableIni(this.tableName);
   }
 
-  getOptionButtonBar(row: FailureType): OptionButtonBar {
+  getOptionButtonBar(row: FailureImpact): OptionButtonBar {
     this.optionButtonBar.showDetail = true;
     this.optionButtonBar.pathDetail = this.utils.getRouterLinkValue(this.parentPath, this.appSettingsService.DetailLink, row.id);
     if (row.statusId === StatusType.Activo) {

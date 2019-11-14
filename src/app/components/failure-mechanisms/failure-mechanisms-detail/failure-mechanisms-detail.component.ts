@@ -10,27 +10,27 @@ import { StepperBar } from 'src/app/_models/stepper-bar';
 import { AppSettingsService } from 'src/app/_services/app-settings.service';
 import swal from 'sweetalert';
 
-import { FailureCause } from '../../../_models/failure-cause';
-import { FailureCauseService } from 'src/app/_services/failure-cause.service';
-import { FailureCauseSharedService } from 'src/app/_services/failure-cause-shared.service';
+import { FailureMechanism } from '../../../_models/failure-mechanism';
+import { FailureMechanismService } from 'src/app/_services/failure-mechanism.service';
+import { FailureMechanismSharedService } from 'src/app/_services/failure-mechanism-shared.service';
 
 @Component({
-  selector: 'app-failure-causes-detail',
-  templateUrl: './failure-causes-detail.component.html',
-  styleUrls: ['./failure-causes-detail.component.scss']
+  selector: 'app-failure-mechanisms-detail',
+  templateUrl: './failure-mechanisms-detail.component.html',
+  styleUrls: ['./failure-mechanisms-detail.component.scss']
 })
-export class FailureCausesDetailComponent implements OnInit {
+export class FailureMechanismsDetailComponent implements OnInit {
 
-  objName = 'Causa de falla';
+  objName = 'Mecanismos de falla';
   deleteMode = false;
   isLoadingData = false;
-  currentObj: FailureCause;
+  currentObj: FailureMechanism;
   spinnerType = SpinnerType;
-  entityType = EntityType.FailureCause;
+  entityType = EntityType.FailureMechanism;
   serviceException: ServiceException;
   utils = new Utils();
   bgColor = BgColor;
-  parentPath = 'failurecauses';
+  parentPath = 'failuremechanisms';
   indexPath = `/${this.parentPath}`;
   editPath: string;
   deletePath: string;
@@ -39,10 +39,10 @@ export class FailureCausesDetailComponent implements OnInit {
   stepperBar: StepperBar;
 
   constructor(
-    private objService: FailureCauseService,
+    private objService: FailureMechanismService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private objSharedService: FailureCauseSharedService,
+    private objSharedService: FailureMechanismSharedService,
     public appSettingsService: AppSettingsService) { }
 
     ngOnInit() {
@@ -77,7 +77,7 @@ export class FailureCausesDetailComponent implements OnInit {
       }
     }
 
-    onLoadForm(obj: FailureCause) {
+    onLoadForm(obj: FailureMechanism) {
       this.currentObj = obj;
     }
 
@@ -127,7 +127,7 @@ export class FailureCausesDetailComponent implements OnInit {
       this.router.navigate([`/${this.parentPath}`]);
     }
 
-    onDeleteSuccess(obj: FailureCause) {
+    onDeleteSuccess(obj: FailureMechanism) {
       this.stopLoading();
       this.goToIndex();
     }

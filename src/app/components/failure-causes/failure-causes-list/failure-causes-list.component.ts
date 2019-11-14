@@ -29,7 +29,7 @@ export class FailureCausesListComponent implements OnInit, AfterViewInit {
   objsFiltered: FailureCause[];
   currentDate: string;
   isLoadingData = false;
-  entityType = EntityType;
+  entityType = EntityType.FailureCause;
   spinnerType = SpinnerType;
   searchText = '';
   tableName = 'ft-index';
