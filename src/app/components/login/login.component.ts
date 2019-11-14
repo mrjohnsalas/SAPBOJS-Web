@@ -2,6 +2,11 @@ import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { ServiceException } from 'src/app/_models/service-exception';
+import { HttpErrorResponse } from '@angular/common/http';
+import { User } from 'src/app/_models/user';
+import { Utils } from 'src/app/_helpers/utils.helper';
+import { AppSettingsService } from '../../_services/app-settings.service';
 
 @Component({
   selector: 'app-login',
@@ -11,20 +16,31 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
-  loading = false;
   submitted = false;
   returnUrl: string;
-  error = '';
+  isLoadingData = false;
+  serviceException: ServiceException;
+  utils = new Utils();
+  emailMaxLength: 256;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private ngZone: NgZone,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService,
+    public appSettingsService: AppSettingsService) {
     if (this.authenticationService.currentUserValue) {
         this.router.navigate(['/']);
     }
+  }
+
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
   }
 
   ngOnInit() {
@@ -32,9 +48,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     body.classList.add('gray-bg');
 
     this.loginForm = this.formBuilder.group({
-        email: ['', Validators.required],
-        password: ['', Validators.required]
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(this.emailMaxLength)]],
+      password: ['', [Validators.required]]
     });
+
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
@@ -43,25 +60,36 @@ export class LoginComponent implements OnInit, OnDestroy {
     body.classList.remove('gray-bg');
   }
 
-  public get f() { return this.loginForm.controls; }
-
-  onSubmit() {
+  submit() {
     this.submitted = true;
 
     if (this.loginForm.invalid) {
-        return;
+      alert('Error');
+      return;
     }
 
-    this.loading = true;
-    this.authenticationService.login(this.f.email.value, this.f.password.value).subscribe(
-      data => {
-        this.ngZone.run(() => {
-          this.router.navigate([this.returnUrl]);
-        });
-      },
-      error => {
-        this.error = error;
-        this.loading = false;
-      });
+    this.isLoadingData = true;
+
+    this.authenticationService.login(this.email.value, this.password.value).subscribe(
+      obj => this.onSuccess(obj),
+      error => this.onError(error),
+      () => this.stopLoading()
+    );
+  }
+
+  onSuccess(obj: User) {
+    this.stopLoading();
+    this.ngZone.run(() => {
+      this.router.navigate([this.returnUrl]);
+    });
+  }
+
+  onError(errorResponse: HttpErrorResponse) {
+    this.stopLoading();
+    this.serviceException = this.utils.getServiceExceptionObject(errorResponse, this.appSettingsService);
+  }
+
+  stopLoading() {
+    this.isLoadingData = false;
   }
 }

@@ -9,10 +9,13 @@ import { ServiceException } from '../../../_models/service-exception';
 import { Utils } from '../../../_helpers/utils.helper';
 import { BgColor } from '../../../_models/bg-color.enum';
 import { AppSettingsService } from 'src/app/_services/app-settings.service';
+import { ToastrType } from 'src/app/_models/toastr-type.enum';
 import swal from 'sweetalert';
 
 import { FailureCauseService } from 'src/app/_services/failure-cause.service';
 import { FailureCause } from '../../../_models/failure-cause';
+
+declare function sendToastr(toastrType: ToastrType, message: string, title: string): any;
 
 @Component({
   selector: 'app-failure-causes-form',
@@ -78,7 +81,6 @@ export class FailureCausesFormComponent implements OnInit, CanDeactivateRoute {
   }
 
   ngOnInit() {
-
     this.formGroup = this.formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(this.nameMaxLength)]],
       description: ['', [Validators.maxLength(this.descriptionMaxLength)]]
@@ -88,14 +90,13 @@ export class FailureCausesFormComponent implements OnInit, CanDeactivateRoute {
       if (params.id === undefined) { return; }
       this.isLoadingData = true;
       this.editMode = true;
-      this.id = params.id;
+      this.id = parseInt(params.id);
       this.objService.get(this.id).subscribe(
         obj => this.onLoadForm(obj),
         error => this.onError(error),
         () => this.stopLoading()
       );
     });
-
   }
 
   onLoadForm(obj: FailureCause) {
@@ -108,8 +109,8 @@ export class FailureCausesFormComponent implements OnInit, CanDeactivateRoute {
   submit() {
     this.saved = true;
 
-    if (!this.formGroup.valid) {
-      alert('Error');
+    if (this.formGroup.invalid) {
+      swal(this.appSettingsService.InvalidFormErrorTitle, this.appSettingsService.InvalidFormErrorMessage, this.bgColor.Warning);
       return;
     }
 
@@ -137,13 +138,19 @@ export class FailureCausesFormComponent implements OnInit, CanDeactivateRoute {
 
   onSaveSuccess(obj: FailureCause) {
     this.stopLoading();
+    sendToastr(ToastrType.Success, this.appSettingsService.GoodNotification, this.appSettingsService.AppMinName);
     this.goToIndex();
   }
 
   onError(errorResponse: HttpErrorResponse) {
     this.stopLoading();
     this.saved = false;
-    this.serviceException = this.utils.getServiceExceptionObject(errorResponse);
+    this.serviceException = this.utils.getServiceExceptionObject(errorResponse, this.appSettingsService);
+    if (this.editMode && this.serviceException.isNotFoundError) {
+      this.saved = true;
+      sendToastr(ToastrType.Error, this.serviceException.message, this.appSettingsService.AppMinName);
+      this.goToIndex();
+    }
   }
 
   stopLoading() {

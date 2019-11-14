@@ -5,4 +5,5 @@ export class ServiceException {
     function: string;
     date: Date;
     userId: string;
+    isNotFoundError: boolean;
 }

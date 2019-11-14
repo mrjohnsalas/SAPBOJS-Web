@@ -8,11 +8,14 @@ import { EntityType } from 'src/app/_models/entity-type.enum';
 import { SpinnerType } from 'src/app/_models/spinner-type.enum';
 import { StepperBar } from 'src/app/_models/stepper-bar';
 import { AppSettingsService } from 'src/app/_services/app-settings.service';
+import { ToastrType } from 'src/app/_models/toastr-type.enum';
 import swal from 'sweetalert';
 
 import { FailureMechanism } from '../../../_models/failure-mechanism';
 import { FailureMechanismService } from 'src/app/_services/failure-mechanism.service';
 import { FailureMechanismSharedService } from 'src/app/_services/failure-mechanism-shared.service';
+
+declare function sendToastr(toastrType: ToastrType, message: string, title: string): any;
 
 @Component({
   selector: 'app-failure-mechanisms-detail',
@@ -49,6 +52,7 @@ export class FailureMechanismsDetailComponent implements OnInit {
       this.ids = this.objSharedService.ids;
       this.activatedRoute.params.subscribe(params => {
         if (params.id === undefined) {
+          sendToastr(ToastrType.Error, this.appSettingsService.IdNotFoundError, this.appSettingsService.AppMinName);
           this.goToIndex();
         }
         this.isLoadingData = true;
@@ -83,7 +87,11 @@ export class FailureMechanismsDetailComponent implements OnInit {
 
     onError(errorResponse: HttpErrorResponse) {
       this.stopLoading();
-      this.serviceException = this.utils.getServiceExceptionObject(errorResponse);
+      this.serviceException = this.utils.getServiceExceptionObject(errorResponse, this.appSettingsService);
+      if (this.serviceException.isNotFoundError) {
+        sendToastr(ToastrType.Error, this.serviceException.message, this.appSettingsService.AppMinName);
+        this.goToIndex();
+      }
     }
 
     stopLoading() {
@@ -94,7 +102,7 @@ export class FailureMechanismsDetailComponent implements OnInit {
       swal({
         title: this.appSettingsService.QuestionTitle,
         text: this.appSettingsService.DeleteQuestion,
-        icon: 'danger',
+        icon: this.bgColor.Danger,
         buttons: {
           cancel: {
             text: this.appSettingsService.CancelAction,
@@ -129,6 +137,7 @@ export class FailureMechanismsDetailComponent implements OnInit {
 
     onDeleteSuccess(obj: FailureMechanism) {
       this.stopLoading();
+      sendToastr(ToastrType.Success, this.appSettingsService.GoodNotification, this.appSettingsService.AppMinName);
       this.goToIndex();
     }
 

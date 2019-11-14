@@ -8,6 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ServiceException } from 'src/app/_models/service-exception';
 import { Router } from '@angular/router';
 import { AppSettingsService } from 'src/app/_services/app-settings.service';
+import { ToastrType } from '../../../_models/toastr-type.enum';
 
 import { FailureSeverity } from '../../../_models/failure-severity';
 import { FailureSeverityService } from '../../../_services/failure-severity.service';
@@ -15,6 +16,7 @@ import { FailureSeveritySharedService } from '../../../_services/failure-severit
 
 declare function setFootable(tableName: string): any;
 declare function footableIni(tableName: string): any;
+declare function sendToastr(toastrType: ToastrType, message: string, title: string): any;
 
 @Component({
   selector: 'app-failure-severities-list',
@@ -72,8 +74,8 @@ export class FailureSeveritiesListComponent implements OnInit, AfterViewInit {
 
   onError(errorResponse: HttpErrorResponse) {
     this.stopLoading();
-    this.serviceException = this.utils.getServiceExceptionObject(errorResponse);
-    console.table(this.serviceException);
+    this.serviceException = this.utils.getServiceExceptionObject(errorResponse, this.appSettingsService);
+    sendToastr(ToastrType.Error, this.serviceException.message, this.appSettingsService.AppMinName);
     this.router.navigate([this.homePath]);
   }
 

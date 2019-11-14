@@ -2,49 +2,53 @@
     <div class="row">
 
         <div class="col-md-6">
-            <h2 class="font-bold">Bienvenido a SapBO.JS</h2>
+            <h2 class="font-bold">{{ appSettingsService.WellcomeMessage }} a {{ appSettingsService.AppName }}</h2>
 
-            <p>
-                SapBO.JS es una de las soluciones de negocios más avanzada y robusta del mercado, 100% integrada con SAP Business One.
-            </p>
+            <p>{{ appSettingsService.AppDescription1 }}</p>
 
-            <p>
-                <small>Es fácil de usar y configurar. Es tan simple como lo desees o tan sofisticado como lo necesites.</small>
-            </p>
+            <p><small>{{ appSettingsService.AppDescription2 }}</small></p>
 
         </div>
         <div class="col-md-6">
             <div class="ibox-content">
-                <form class="m-t" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Correo" autocomplete="on" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                            <div *ngIf="f.email.errors.required">Email is required</div>
-                        </div>
+                
+                <form class="m-t" [formGroup]="loginForm" (submit)="submit()">
+
+                    <div class="form-group" [ngClass]="{'has-error': email.invalid && (email.dirty || email.touched)}">
+                        <input class="form-control" type="email" placeholder="Correo" autocomplete="on" formControlName="email">
+                        <span class="text-danger" *ngIf="(email.dirty || email.touched) && email.errors">
+                            <span *ngIf="email.errors.required">{{ appSettingsService.RequiredErrorMessage }}</span>
+                            <span *ngIf="email.errors.email">{{ appSettingsService.RequiredValidEmailErrorMessage }}</span>
+                            <span *ngIf="email.errors.maxlength">{{ appSettingsService.MaxLengthErrorMessage }}{{ emailMaxLength }}.</span>
+                        </span>
                     </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Contraseña" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                            <div *ngIf="f.password.errors.required">Password is required</div>
-                        </div>
+                    <div class="form-group" [ngClass]="{'has-error': password.invalid && (password.dirty || password.touched)}">
+                        <input class="form-control" type="password" placeholder="Contraseña" formControlName="password">
+                        <span class="text-danger" *ngIf="(password.dirty || password.touched) && password.errors">
+                            <span *ngIf="password.errors.required">{{ appSettingsService.RequiredErrorMessage }}</span>
+                        </span>
                     </div>
-                    <button class="btn btn-primary block full-width m-b" [disabled]="loading">
-                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                        Iniciar sesión
+                    <button type="submit" class="btn btn-primary block full-width m-b"
+                        title="{{ appSettingsService.LoginAction }}"
+                        [disabled]="loginForm.invalid || isLoadingData">
+                        <span *ngIf="isLoadingData" class="spinner-border spinner-border-sm mr-1"></span>
+                        {{ appSettingsService.LoginAction }}
                     </button>
-                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                    <div *ngIf="serviceException" class="alert alert-danger mt-3 mb-0">{{ serviceException.message }}</div>
                     <!-- <a href="#"><small>Forgot password?</small></a> -->
+
                 </form>
+
             </div>
         </div>
     </div>
     <hr/>
     <div class="row">
         <div class="col-md-6">
-            Desarrollado y diseñado por <a href="mailto:salas.john@hotmail.com">John Salas</a>
+            {{ appSettingsService.AppDeveloped }} <a href="mailto:{{ appSettingsService.DeveloperEmail }}">{{ appSettingsService.DeveloperName }}</a>
         </div>
         <div class="col-md-6 text-right">
-            <small>© 2017-2019</small>
+            <small>© {{ appSettingsService.AppReservedYears }}</small>
         </div>
     </div>
 </div>
