@@ -5,8 +5,8 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 import { ServiceException } from 'src/app/_models/service-exception';
 import { HttpErrorResponse } from '@angular/common/http';
 import { User } from 'src/app/_models/user';
-import { Utils } from 'src/app/_helpers/utils.helper';
 import { AppSettingsService } from '../../_services/app-settings.service';
+import { AppHelperService } from '../../_services/app-helper.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   returnUrl: string;
   isLoadingData = false;
   serviceException: ServiceException;
-  utils = new Utils();
   emailMaxLength: 256;
 
   constructor(
@@ -29,7 +28,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private ngZone: NgZone,
     private authenticationService: AuthenticationService,
-    public appSettingsService: AppSettingsService) {
+    public appSettingsService: AppSettingsService,
+    private appHelperService: AppHelperService) {
     if (this.authenticationService.currentUserValue) {
         this.router.navigate(['/']);
     }
@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onError(errorResponse: HttpErrorResponse) {
     this.stopLoading();
-    this.serviceException = this.utils.getServiceExceptionObject(errorResponse, this.appSettingsService);
+    this.serviceException = this.appHelperService.getServiceExceptionObject(errorResponse);
   }
 
   stopLoading() {

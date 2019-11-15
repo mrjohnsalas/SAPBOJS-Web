@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EntityType } from '../../../_models/entity-type.enum';
 import { StatusType } from '../../../_models/status-type.enum';
-import { Utils } from 'src/app/_helpers/utils.helper';
+import { AppHelperService } from '../../../_services/app-helper.service';
 
 @Component({
   selector: 'app-status-label',
@@ -12,17 +12,16 @@ export class StatusLabelComponent implements OnInit {
 
   statusTypeColor = '';
   statusTypeName = '';
-  utils = new Utils();
 
   @Input()
   selectedEntity: EntityType;
   @Input()
   selectedStatus: StatusType;
 
-  constructor() { }
+  constructor(private appHelperService: AppHelperService) { }
 
   ngOnInit() {
-    this.statusTypeColor = this.utils.getStatusTypeColor(this.selectedEntity, this.selectedStatus);
+    this.statusTypeColor = this.appHelperService.getStatusTypeColor(this.selectedEntity, this.selectedStatus);
     this.statusTypeName = StatusType[this.selectedStatus];
   }
 

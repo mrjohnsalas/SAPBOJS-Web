@@ -6,16 +6,12 @@ import { Observable } from 'rxjs';
 import { CanDeactivateRoute } from 'src/app/_helpers/lose-changes.guard';
 import { SpinnerType } from '../../../_models/spinner-type.enum';
 import { ServiceException } from '../../../_models/service-exception';
-import { Utils } from '../../../_helpers/utils.helper';
 import { BgColor } from '../../../_models/bg-color.enum';
 import { AppSettingsService } from 'src/app/_services/app-settings.service';
-import { ToastrType } from 'src/app/_models/toastr-type.enum';
-import swal from 'sweetalert';
+import { AppHelperService } from 'src/app/_services/app-helper.service';
 
 import { FailureMechanismService } from 'src/app/_services/failure-mechanism.service';
 import { FailureMechanism } from '../../../_models/failure-mechanism';
-
-declare function sendToastr(toastrType: ToastrType, message: string, title: string): any;
 
 @Component({
   selector: 'app-failure-mechanisms-form',
@@ -33,7 +29,6 @@ export class FailureMechanismsFormComponent implements OnInit, CanDeactivateRout
   id: number;
   saved = false;
   serviceException: ServiceException;
-  utils = new Utils();
   parentPath = 'failuremechanisms';
   indexPath = `/${this.parentPath}`;
   nameMaxLength: 30;
@@ -44,7 +39,8 @@ export class FailureMechanismsFormComponent implements OnInit, CanDeactivateRout
     private objService: FailureMechanismService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    public appSettingsService: AppSettingsService) { }
+    public appSettingsService: AppSettingsService,
+    private appHelperService: AppHelperService) { }
 
   get name() {
     return this.formGroup.get('name');
@@ -57,27 +53,7 @@ export class FailureMechanismsFormComponent implements OnInit, CanDeactivateRout
   canExit(): boolean | Observable<boolean> | Promise<boolean> {
     if (this.saved) { return true; }
 
-    return swal({
-      title: this.appSettingsService.QuestionTitle,
-      text: this.appSettingsService.ExitQuestion,
-      icon: this.bgColor.Warning,
-      buttons: {
-        cancel: {
-          text: this.appSettingsService.CancelAction,
-          value: false,
-          className: '',
-          visible: true,
-          closeModal: true,
-        },
-        confirm: {
-          text: this.appSettingsService.ExitAction,
-          value: true,
-          className: '',
-          visible: true,
-          closeModal: true
-        }
-      },
-    }).then( (val) => val );
+    return this.appHelperService.sendCanExitAlert().then( (val) => val );
   }
 
   ngOnInit() {
@@ -110,7 +86,7 @@ export class FailureMechanismsFormComponent implements OnInit, CanDeactivateRout
     this.saved = true;
 
     if (this.formGroup.invalid) {
-      swal(this.appSettingsService.InvalidFormErrorTitle, this.appSettingsService.InvalidFormErrorMessage, this.bgColor.Warning);
+      this.appHelperService.sendInvalidFormAlert();
       return;
     }
 
@@ -138,17 +114,17 @@ export class FailureMechanismsFormComponent implements OnInit, CanDeactivateRout
 
   onSaveSuccess(obj: FailureMechanism) {
     this.stopLoading();
-    sendToastr(ToastrType.Success, this.appSettingsService.GoodNotification, this.appSettingsService.AppMinName);
+    this.appHelperService.sendSuccessMessage(this.appSettingsService.GoodNotification);
     this.goToIndex();
   }
 
   onError(errorResponse: HttpErrorResponse) {
     this.stopLoading();
     this.saved = false;
-    this.serviceException = this.utils.getServiceExceptionObject(errorResponse, this.appSettingsService);
+    this.serviceException = this.appHelperService.getServiceExceptionObject(errorResponse);
     if (this.editMode && this.serviceException.isNotFoundError) {
       this.saved = true;
-      sendToastr(ToastrType.Error, this.serviceException.message, this.appSettingsService.AppMinName);
+      this.appHelperService.sendErrorMessage(this.serviceException.message);
       this.goToIndex();
     }
   }

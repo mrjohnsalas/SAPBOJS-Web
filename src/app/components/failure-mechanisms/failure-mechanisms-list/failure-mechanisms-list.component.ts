@@ -3,12 +3,11 @@ import { SpinnerType } from '../../../_models/spinner-type.enum';
 import { EntityType } from '../../../_models/entity-type.enum';
 import { OptionButtonBar } from '../../../_models/option-button-bar';
 import { StatusType } from '../../../_models/status-type.enum';
-import { Utils } from '../../../_helpers/utils.helper';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ServiceException } from 'src/app/_models/service-exception';
 import { Router } from '@angular/router';
 import { AppSettingsService } from 'src/app/_services/app-settings.service';
-import { ToastrType } from '../../../_models/toastr-type.enum';
+import { AppHelperService } from 'src/app/_services/app-helper.service';
 
 import { FailureMechanism } from '../../../_models/failure-mechanism';
 import { FailureMechanismService } from '../../../_services/failure-mechanism.service';
@@ -16,7 +15,6 @@ import { FailureMechanismSharedService } from '../../../_services/failure-mechan
 
 declare function setFootable(tableName: string): any;
 declare function footableIni(tableName: string): any;
-declare function sendToastr(toastrType: ToastrType, message: string, title: string): any;
 
 @Component({
   selector: 'app-failure-mechanisms-list',
@@ -36,7 +34,6 @@ export class FailureMechanismsListComponent implements OnInit, AfterViewInit {
   searchText = '';
   tableName = 'ft-index';
   optionButtonBar = new OptionButtonBar();
-  utils = new Utils();
   serviceException: ServiceException;
   parentPath = 'failuremechanisms';
   newPath = `/${this.parentPath}/${this.appSettingsService.CreateLink}`;
@@ -46,7 +43,8 @@ export class FailureMechanismsListComponent implements OnInit, AfterViewInit {
     private objService: FailureMechanismService,
     private router: Router,
     private objSharedService: FailureMechanismSharedService,
-    public appSettingsService: AppSettingsService) { }
+    public appSettingsService: AppSettingsService,
+    private appHelperService: AppHelperService) { }
 
   ngOnInit() {
     this.isLoadingData = true;
@@ -74,8 +72,8 @@ export class FailureMechanismsListComponent implements OnInit, AfterViewInit {
 
   onError(errorResponse: HttpErrorResponse) {
     this.stopLoading();
-    this.serviceException = this.utils.getServiceExceptionObject(errorResponse, this.appSettingsService);
-    sendToastr(ToastrType.Error, this.serviceException.message, this.appSettingsService.AppMinName);
+    this.serviceException = this.appHelperService.getServiceExceptionObject(errorResponse);
+    this.appHelperService.sendErrorMessage(this.serviceException.message);
     this.router.navigate([this.homePath]);
   }
 
@@ -117,12 +115,17 @@ export class FailureMechanismsListComponent implements OnInit, AfterViewInit {
 
   getOptionButtonBar(row: FailureMechanism): OptionButtonBar {
     this.optionButtonBar.showDetail = true;
-    this.optionButtonBar.pathDetail = this.utils.getRouterLinkValue(this.parentPath, this.appSettingsService.DetailLink, row.id);
+    this.optionButtonBar.pathDetail = this.appHelperService.getRouterLinkValue(this.parentPath, this.appSettingsService.DetailLink, row.id);
     if (row.statusId === StatusType.Activo) {
       this.optionButtonBar.showEdit = true;
-      this.optionButtonBar.pathEdit = this.utils.getRouterLinkValue(this.parentPath, this.appSettingsService.EditLink, row.id);
+      this.optionButtonBar.pathEdit = this.appHelperService.getRouterLinkValue(this.parentPath, this.appSettingsService.EditLink, row.id);
       this.optionButtonBar.showCancel = true;
-      this.optionButtonBar.pathCancel = this.utils.getRouterLinkValue(this.parentPath, this.appSettingsService.DeleteLink, row.id);
+      this.optionButtonBar.pathCancel = this.appHelperService.getRouterLinkValue(this.parentPath, this.appSettingsService.DeleteLink, row.id);
+    } else {
+      this.optionButtonBar.showEdit = false;
+      this.optionButtonBar.pathEdit = '';
+      this.optionButtonBar.showCancel = false;
+      this.optionButtonBar.pathCancel = '';
     }
     return this.optionButtonBar;
   }

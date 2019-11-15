@@ -43,22 +43,25 @@
                         <i class="fa fa-arrow-left"></i> {{ appSettingsService.BackToIndexAction }}
                     </button>
                     <button type="button" class="btn btn-primary btn-sm ml-1"
-                        title="{{ appSettingsService.EditAction }}" [routerLink]="editPath" [disabled]="isLoadingData">
+                        title="{{ appSettingsService.EditAction }}" [routerLink]="editPath" 
+                        [disabled]="isLoadingData" *ngIf="editPath">
                         <i class="fa fa-pencil"></i> {{ appSettingsService.EditAction }}
                     </button>
                     <button type="button" class="btn btn-danger btn-sm ml-1"
                         title="{{ appSettingsService.DeleteAction }}" [routerLink]="deletePath"
-                        [disabled]="isLoadingData">
+                        [disabled]="isLoadingData" *ngIf="deletePath">
                         <i class="fa fa-trash"></i> {{ appSettingsService.DeleteAction }}
                     </button>
                 </div>
                 <div class="col-sm-4" *ngIf="deleteMode">
-                    <button type="button" class="btn btn-white btn-sm" title="{{ appSettingsService.CancelAction }}"
-                        [routerLink]="indexPath" [disabled]="isLoadingData">
+                    <button type="button" class="btn btn-white btn-sm" 
+                        title="{{ appSettingsService.CancelAction }}" [routerLink]="indexPath" 
+                        [disabled]="isLoadingData">
                         <i class="fa fa-times"></i> {{ appSettingsService.CancelAction }}
                     </button>
                     <button type="button" class="btn btn-danger btn-sm ml-1"
-                        title="{{ appSettingsService.DeleteAction }}" (click)="delete()" [disabled]="isLoadingData">
+                        title="{{ appSettingsService.DeleteAction }}" (click)="delete()" 
+                        [disabled]="isLoadingData" *ngIf="deletePath">
                         <i class="fa fa-trash"></i> {{ appSettingsService.DeleteAction }}
                     </button>
                 </div>
