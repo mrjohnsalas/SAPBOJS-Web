@@ -129,6 +129,8 @@ $(document).ready(function () {
     setFootable('');
 
     toastrInit();
+
+    icheckInit();
 });
 
 function runMenuOfCanvas() {
@@ -196,6 +198,13 @@ function toastrInit() {
         hideMethod: "fadeOut"
     };
 };
+
+function icheckInit() {
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+    });
+}
 
 function sendToastr(toastrType, message, title) {
     switch(toastrType) {

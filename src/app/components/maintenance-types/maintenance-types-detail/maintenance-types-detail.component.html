@@ -1,0 +1,82 @@
+<app-obj-detail 
+    [objName]="objName" 
+    [isLoadingData]="isLoadingData" 
+    [currentObj]="currentObj"
+    [indexPath]="indexPath"
+    [editPath]="editPath"
+    [deletePath]="deletePath"
+    [deleteMode]="deleteMode"
+    [stepperBar]="stepperBar"
+    [serviceException]="serviceException"
+    (sendEventDelete)="delete()">
+    <!-- Init Obj Detail -->
+    <div class="row" *ngIf="currentObj">
+        <div class="col-lg-6">
+            <dl class="row mb-0">
+                <div class="col-sm-4 text-sm-right">
+                    <dt>Id:</dt>
+                </div>
+                <div class="col-sm-8 text-sm-left">
+                    <dd class="mb-1">{{ currentObj.id }}</dd>
+                </div>
+            </dl>
+            <dl class="row mb-0">
+                <div class="col-sm-4 text-sm-right">
+                    <dt>{{ objName }}:</dt>
+                </div>
+                <div class="col-sm-8 text-sm-left">
+                    <dd class="mb-1">{{ currentObj.name }}</dd>
+                </div>
+            </dl>
+        </div>
+        <div class="col-lg-6">
+
+        </div>
+    </div>
+
+    <div class="row" *ngIf="currentObj">
+        <div class="col-lg-6">
+            <dl class="row mb-0">
+                <div class="col-sm-4 text-sm-right">
+                    <dt>Descripción:</dt>
+                </div>
+                <div class="col-sm-8 text-sm-left">
+                    <dd class="mb-1">{{ currentObj.description }}</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="currentObj">
+        <div class="col-lg-6">
+            <dl class="row mb-0">
+                <div class="col-sm-4 text-sm-right">
+                    <dt>¿Requiere falla?:</dt>
+                </div>
+                <div class="col-sm-8 text-sm-left">
+                    <dd class="mb-1">{{ appHelperService.convertBooleanToString(currentObj.requireFailure) }}</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+
+    <div class="row mb-3" *ngIf="currentObj">
+        <div class="col-lg-6">
+            <dl class="row mb-0">
+                <div class="col-sm-4 text-sm-right">
+                    <dt>Estado:</dt>
+                </div>
+                <div class="col-sm-8 text-sm-left">
+                    <dd class="mb-1">
+                        <app-status-label [selectedEntity]="entityType"
+                            [selectedStatus]="currentObj.statusId"></app-status-label>
+                    </dd>
+                </div>
+            </dl>
+        </div>
+        <div class="col-lg-6">
+
+        </div>
+    </div>
+    <!-- End Obj Detail -->
+</app-obj-detail>

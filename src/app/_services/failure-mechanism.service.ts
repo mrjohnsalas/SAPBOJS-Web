@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { FailureMechanism } from '../_models/failure-mechanism';
 import { AuthenticationService } from './authentication.service';
+import { StatusType } from '../_models/status-type.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -14,22 +15,23 @@ export class FailureMechanismService {
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) { }
 
-  getAll(): Observable<FailureMechanism[]> {
-    return this.http.get<FailureMechanism[]>(this.baseUrl);
+  getAll(statusId = StatusType.Todos): Observable<FailureMechanism[]> {
+    const params = new HttpParams().set('statusType', statusId.toString());
+    return this.http.get<FailureMechanism[]>(this.baseUrl, { params });
   }
 
   get(id: number): Observable<FailureMechanism> {
     return this.http.get<FailureMechanism>(`${this.baseUrl}/${id}`);
   }
 
-  create(failureMechanism: FailureMechanism): Observable<FailureMechanism> {
-    failureMechanism.createdBy = this.authenticationService.currentUserValue.email;
-    return this.http.post<FailureMechanism>(this.baseUrl, failureMechanism);
+  create(obj: FailureMechanism): Observable<FailureMechanism> {
+    obj.createdBy = this.authenticationService.currentUserValue.email;
+    return this.http.post<FailureMechanism>(this.baseUrl, obj);
   }
 
-  update(failureMechanism: FailureMechanism): Observable<FailureMechanism> {
-    failureMechanism.updatedBy = this.authenticationService.currentUserValue.email;
-    return this.http.put<FailureMechanism>(`${this.baseUrl}/${failureMechanism.id}`, failureMechanism);
+  update(obj: FailureMechanism): Observable<FailureMechanism> {
+    obj.updatedBy = this.authenticationService.currentUserValue.email;
+    return this.http.put<FailureMechanism>(`${this.baseUrl}/${obj.id}`, obj);
   }
 
   delete(id: number): Observable<FailureMechanism> {

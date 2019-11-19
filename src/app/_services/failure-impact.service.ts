@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { FailureImpact } from '../_models/failure-impact';
 import { AuthenticationService } from './authentication.service';
+import { StatusType } from '../_models/status-type.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -14,22 +15,23 @@ export class FailureImpactService {
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) { }
 
-  getAll(): Observable<FailureImpact[]> {
-    return this.http.get<FailureImpact[]>(this.baseUrl);
+  getAll(statusId = StatusType.Todos): Observable<FailureImpact[]> {
+    const params = new HttpParams().set('statusType', statusId.toString());
+    return this.http.get<FailureImpact[]>(this.baseUrl, { params });
   }
 
   get(id: number): Observable<FailureImpact> {
     return this.http.get<FailureImpact>(`${this.baseUrl}/${id}`);
   }
 
-  create(failureImpact: FailureImpact): Observable<FailureImpact> {
-    failureImpact.createdBy = this.authenticationService.currentUserValue.email;
-    return this.http.post<FailureImpact>(this.baseUrl, failureImpact);
+  create(obj: FailureImpact): Observable<FailureImpact> {
+    obj.createdBy = this.authenticationService.currentUserValue.email;
+    return this.http.post<FailureImpact>(this.baseUrl, obj);
   }
 
-  update(failureImpact: FailureImpact): Observable<FailureImpact> {
-    failureImpact.updatedBy = this.authenticationService.currentUserValue.email;
-    return this.http.put<FailureImpact>(`${this.baseUrl}/${failureImpact.id}`, failureImpact);
+  update(obj: FailureImpact): Observable<FailureImpact> {
+    obj.updatedBy = this.authenticationService.currentUserValue.email;
+    return this.http.put<FailureImpact>(`${this.baseUrl}/${obj.id}`, obj);
   }
 
   delete(id: number): Observable<FailureImpact> {

@@ -23,6 +23,11 @@ export class AppHelperService {
             case EntityType.FailureMechanism:
             case EntityType.FailureSeverity:
             case EntityType.FailureType:
+            case EntityType.Job:
+            case EntityType.MaintenanceType:
+            case EntityType.MaintenancePriority:
+            case EntityType.TimeFrequency:
+            case EntityType.ProductionMachine:
                 switch (statusType) {
                     case StatusType.Activo:
                         return 'primary';
@@ -101,5 +106,9 @@ export class AppHelperService {
 
     sendSuccessMessage(message: string): void {
         sendToastr(ToastrType.Success, message, this.appSettingsService.AppMinName);
+    }
+
+    convertBooleanToString(value: boolean): string {
+        return value ? 'Si' : 'No';
     }
 }

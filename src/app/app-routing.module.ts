@@ -28,6 +28,28 @@ const routes: Routes = [
     path: 'failureseverities', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
     loadChildren: () => import('./_modules/failure-severities.module').then(module => module.FailureSeveritiesModule)
   },
+
+  {
+    path: 'jobs', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
+    loadChildren: () => import('./_modules/jobs.module').then(module => module.JobsModule)
+  },
+  {
+    path: 'maintenancepriorities', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
+    loadChildren: () => import('./_modules/maintenance-priorities.module').then(module => module.MaintenancePrioritiesModule)
+  },
+  {
+    path: 'maintenancetypes', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
+    loadChildren: () => import('./_modules/maintenance-types.module').then(module => module.MaintenanceTypesModule)
+  },
+  {
+    path: 'timefrequencies', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
+    loadChildren: () => import('./_modules/time-frequencies.module').then(module => module.TimeFrequenciesModule)
+  },
+  {
+    path: 'productionmachines', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
+    loadChildren: () => import('./_modules/production-machines.module').then(module => module.ProductionMachinesModule)
+  },
+
   { path: '**', redirectTo: '' }
 ];
 

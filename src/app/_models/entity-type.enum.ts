@@ -3,5 +3,10 @@ export enum EntityType {
     FailureImpact,
     FailureMechanism,
     FailureSeverity,
-    FailureType
+    FailureType,
+    Job,
+    MaintenancePriority,
+    MaintenanceType,
+    TimeFrequency,
+    ProductionMachine
 }

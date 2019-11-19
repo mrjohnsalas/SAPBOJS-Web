@@ -34,6 +34,7 @@
               "./node_modules/footable/css/footable.core.min.css",
               "./node_modules/animate.css/animate.min.css",
               "./node_modules/toastr/build/toastr.min.css",
+              "./node_modules/icheck/skins/square/green.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -44,6 +45,7 @@
               "./node_modules/footable/dist/footable.all.min.js",
               "./node_modules/jquery-slimscroll/jquery.slimscroll.min.js",
               "./node_modules/toastr/build/toastr.min.js",
+              "./node_modules/icheck/icheck.min.js",
               "src/assets/js/inspinia.js",
               "./node_modules/pace-js/pace.min.js"
             ]
