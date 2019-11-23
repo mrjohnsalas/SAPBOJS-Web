@@ -28,7 +28,6 @@ const routes: Routes = [
     path: 'failureseverities', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
     loadChildren: () => import('./_modules/failure-severities.module').then(module => module.FailureSeveritiesModule)
   },
-
   {
     path: 'jobs', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
     loadChildren: () => import('./_modules/jobs.module').then(module => module.JobsModule)
@@ -48,6 +47,10 @@ const routes: Routes = [
   {
     path: 'productionmachines', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
     loadChildren: () => import('./_modules/production-machines.module').then(module => module.ProductionMachinesModule)
+  },
+  {
+    path: 'employees', canLoad: [AuthGuard], data: { roles: environment.maintenanceRoles },
+    loadChildren: () => import('./_modules/employees.module').then(module => module.EmployeesModule)
   },
 
   { path: '**', redirectTo: '' }

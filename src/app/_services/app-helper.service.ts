@@ -28,6 +28,7 @@ export class AppHelperService {
             case EntityType.MaintenancePriority:
             case EntityType.TimeFrequency:
             case EntityType.ProductionMachine:
+            case EntityType.Employee:
                 switch (statusType) {
                     case StatusType.Activo:
                         return 'primary';

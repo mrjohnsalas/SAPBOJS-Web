@@ -6,11 +6,11 @@
             <label class="control-label"><strong>Buscar</strong></label>
 
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar" [(ngModel)]="searchText">
+                <input type="text" class="form-control form-control-sm" placeholder="Buscar" [(ngModel)]="searchText">
                 <span class="input-group-append">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-primary" (click)="search()" [disabled]="isLoadingData" title="Buscar"><i class="fa fa-search"></i></button>
-                        <button type="button" class="btn btn-success" (click)="refresh()" [disabled]="isLoadingData" title="Refrescar"><i class="fa fa-refresh"></i></button>
+                        <button type="button" class="btn btn-primary btn-sm" (click)="search()" [disabled]="isLoadingData" title="Buscar"><i class="fa fa-search"></i></button>
+                        <button type="button" class="btn btn-success btn-sm" (click)="refresh()" [disabled]="isLoadingData" title="Refrescar"><i class="fa fa-refresh"></i></button>
                     </div>
                 </span>
             </div>

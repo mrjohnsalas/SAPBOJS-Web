@@ -43,7 +43,7 @@ export class MaintenanceTypesDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private objSharedService: MaintenanceTypeSharedService,
     public appSettingsService: AppSettingsService,
-    private appHelperService: AppHelperService) { }
+    public appHelperService: AppHelperService) { }
 
   ngOnInit() {
     this.ids = this.objSharedService.ids;

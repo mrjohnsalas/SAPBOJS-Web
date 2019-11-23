@@ -8,5 +8,6 @@ export enum EntityType {
     MaintenancePriority,
     MaintenanceType,
     TimeFrequency,
-    ProductionMachine
+    ProductionMachine,
+    Employee
 }

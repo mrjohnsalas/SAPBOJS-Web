@@ -1,0 +1,33 @@
+<div class="row">
+
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="control-label"><strong>Puesto trabajo</strong></label>
+            <select class="form-control form-control-sm m-b" [disabled]="isLoadingData" style="height: 31px;" [(ngModel)]="selectedJob" (change)="jobChange()">
+                <option [ngValue]="null" selected>-- Todos --</option>
+                <option [ngValue]="job" *ngFor="let job of jobs; let last = last">{{ job.name }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group">
+
+            <label class="control-label"><strong>Buscar</strong></label>
+
+            <div class="input-group">
+                <input type="text" class="form-control form-control-sm" placeholder="Buscar" [(ngModel)]="searchText">
+                <span class="input-group-append">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="search()" [disabled]="isLoadingData"
+                            title="Buscar"><i class="fa fa-search"></i></button>
+                        <button type="button" class="btn btn-success btn-sm" (click)="refresh()" [disabled]="isLoadingData"
+                            title="Refrescar"><i class="fa fa-refresh"></i></button>
+                    </div>
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+</div>
