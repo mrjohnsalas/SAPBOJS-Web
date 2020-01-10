@@ -4,7 +4,7 @@
         <div class="form-group">
             <label class="control-label"><strong>Puesto trabajo</strong></label>
             <select class="form-control form-control-sm m-b" [disabled]="isLoadingData" style="height: 31px;" [(ngModel)]="selectedJob" (change)="jobChange()">
-                <option [ngValue]="null" selected>-- Todos --</option>
+                <option [ngValue]="undefined">-- Todos --</option>
                 <option [ngValue]="job" *ngFor="let job of jobs; let last = last">{{ job.name }}</option>
             </select>
         </div>
